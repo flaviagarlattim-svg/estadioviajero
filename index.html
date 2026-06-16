@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Venta Mundial — Viajero</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #0f0e0c;
+    --cream: #f9f5ee;
+    --sand: #e8e0d0;
+    --amber: #c9821a;
+    --amber-light: #f5c96e;
+    --teal: #1a6b6b;
+    --coral: #c94f3a;
+    --muted: #7a7468;
+    --card: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: #ffffff;
+    color: var(--amber);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--amber);
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    color: var(--amber);
+  }
+  header h1 em { font-style: italic; color: var(--amber); }
+  .header-meta {
+    text-align: right;
+    font-size: 11px;
+    color: var(--amber);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+  .header-meta strong {
+    display: block;
+    font-size: 22px;
+    color: var(--amber);
+    font-family: 'DM Serif Display', serif;
+    margin-top: 2px;
+  }
+
+  /* FILTER BAR */
+  .filter-bar {
+    background: var(--ink);
+    border-top: 1px solid #2a2924;
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    font-weight: 600;
+    white-space: nowrap;
+    margin-right: 4px;
+  }
+  .filter-btn {
+    padding: 5px 14px;
+    border-radius: 2px;
+    border: 1px solid #3a3830;
+    background: transparent;
+    color: var(--sand);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+  }
+  .filter-btn:hover { border-color: var(--amber); color: var(--amber-light); }
+  .filter-btn.active {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .filter-divider {
+    width: 1px;
+    height: 18px;
+    background: #3a3830;
+    margin: 0 4px;
+  }
+
+  /* KPI ROW */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--sand);
+    border-bottom: 1px solid var(--sand);
+  }
+  .kpi {
+    background: var(--card);
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: opacity 0.25s;
+  }
+  .kpi-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .kpi-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--ink);
+    transition: all 0.2s;
+  }
+  .kpi-sub {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .kpi:nth-child(2) .kpi-value { color: var(--teal); }
+  .kpi:nth-child(3) .kpi-value { color: var(--amber); }
+  .kpi:nth-child(4) .kpi-value { color: var(--coral); }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 24px 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border-radius: 4px;
+    border: 1px solid var(--sand);
+    overflow: hidden;
+  }
+  .card-wide { grid-column: 1 / -1; }
+  .card-header {
+    padding: 16px 22px 12px;
+    border-bottom: 1px solid var(--sand);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .card-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+  .card-header span {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .card-header .filter-tag {
+    margin-left: auto;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--amber);
+    background: #fef3de;
+    border: 1px solid var(--amber-light);
+    border-radius: 2px;
+    padding: 2px 8px;
+    display: none;
+  }
+  .card-header .filter-tag.visible { display: inline-block; }
+
+  .card-body { padding: 20px 22px; }
+
+  /* SEDE RANKING BARS */
+  .sede-list { display: flex; flex-direction: column; gap: 14px; }
+  .sede-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: center;
+  }
+  .sede-name {
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+  }
+  .bar-track {
+    background: var(--sand);
+    border-radius: 2px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.8s cubic-bezier(.4,0,.2,1);
+  }
+  .sede-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 28px;
+    text-align: right;
+  }
+  .rank-badge { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .rank-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    min-width: 16px;
+  }
+
+  canvas { display: block; width: 100% !important; }
+
+    footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 10px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    border-top: 1px solid var(--sand);
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex;align-items:center;gap:28px;">
+    <img src="data:image/png;base64,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" alt="Viajero Hostels" style="height:48px;width:auto;object-fit:contain;">
+    <div style="width:1px;height:40px;background:#e8e0d0;"></div>
+    <div>
+      <div style="font-size:10px;letter-spacing:2px;color:#bbb;font-family:'JetBrains Mono',monospace;margin-bottom:4px;">REPORTE DE VENTAS</div>
+      <h1>Venta <em>Mundial</em></h1>
+      <div style="font-size:11px;color:#bbb;margin-top:4px;font-family:'Inter',sans-serif;">Jun 11 – Jun 15, 2026 · Cadena Viajero Colombia</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    TOTAL UNIDADES<br>
+    <strong id="headerTotal">30</strong>
+    Jun 11 – Jun 15, 2026
+  </div>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">Sede</span>
+  <button class="filter-btn active" data-sede="ALL">Todas</button>
+  <div class="filter-divider"></div>
+  <button class="filter-btn" data-sede="Viajero Bogota">Bogotá</button>
+  <button class="filter-btn" data-sede="Viajero Cali">Cali</button>
+  <button class="filter-btn" data-sede="Viajero Cartagena Centro">Cartagena</button>
+  <button class="filter-btn" data-sede="Viajero Medellin">Medellín</button>
+  <button class="filter-btn" data-sede="Viajero Santa Marta">Santa Marta</button>
+</div>
+
+<!-- KPI ROW -->
+<div class="kpi-row">
+  <div class="kpi">
+    <div class="kpi-label">Total unidades</div>
+    <div class="kpi-value" id="kpiTotal">30</div>
+    <div class="kpi-sub" id="kpiTotalSub">todas las sedes</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Mejor fecha</div>
+    <div class="kpi-value" id="kpiFecha">Jun 15</div>
+    <div class="kpi-sub" id="kpiFechaSub">8 unidades</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Hora pico</div>
+    <div class="kpi-value" id="kpiHora">21h</div>
+    <div class="kpi-sub" id="kpiHoraSub">9 unidades</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Categoría líder</div>
+    <div class="kpi-value" id="kpiCat">Cóctel</div>
+    <div class="kpi-sub" id="kpiCatSub">15 uds · 50%</div>
+  </div>
+</div>
+
+<!-- CHARTS GRID -->
+<div class="grid">
+
+  <!-- RANKING POR SEDE (static — not affected by filter) -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Ranking por Sede</h2>
+      <span>General · sin filtro</span>
+    </div>
+    <div class="card-body">
+      <div class="sede-list" id="sedeList"></div>
+    </div>
+  </div>
+
+  <!-- VENTAS POR CATEGORÍA -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Ventas por Categoría</h2>
+      <span id="catSubtitle">Distribución de unidades</span>
+      <span class="filter-tag" id="catTag"></span>
+    </div>
+    <div class="card-body" style="position:relative;height:260px;display:flex;align-items:center;justify-content:center;">
+      <canvas id="catChart"></canvas>
+    </div>
+  </div>
+
+  <!-- VENTAS POR HORA Y FECHA -->
+  <div class="card card-wide">
+    <div class="card-header">
+      <h2>Ventas por Hora y Fecha</h2>
+      <span>Jun 11 – Jun 15, 2026</span>
+      <span class="filter-tag" id="horaTag"></span>
+    </div>
+    <div class="card-body" style="height:280px;">
+      <canvas id="horaFechaChart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<footer>VENTA_MUNDIAL.xlsx · Dashboard generado automáticamente · Viajero Colombia 2026</footer>
+
+<script>
+// ── FULL RAW DATA ─────────────────────────────────────────────────────────
+const ALL_ROWS = [
+  {"SEDE":"Viajero Bogota","FECHA":"2026-06-12","HORA":19,"PRODUCTO":"Coctel Colombia Sunset","ventas":2,"cat":"COCTEL"},
+  {"SEDE":"Viajero Bogota","FECHA":"2026-06-13","HORA":21,"PRODUCTO":"Coctel Colombia Sunset","ventas":1,"cat":"COCTEL"},
+  {"SEDE":"Viajero Cali","FECHA":"2026-06-11","HORA":21,"PRODUCTO":"Coctel Colombia Sunset","ventas":2,"cat":"COCTEL"},
+  {"SEDE":"Viajero Cali","FECHA":"2026-06-15","HORA":16,"PRODUCTO":"Coctel Colombia Sunset","ventas":1,"cat":"COCTEL"},
+  {"SEDE":"Viajero Cartagena Centro","FECHA":"2026-06-11","HORA":22,"PRODUCTO":"Coctel Colombia Sunset","ventas":1,"cat":"COCTEL"},
+  {"SEDE":"Viajero Cartagena Centro","FECHA":"2026-06-12","HORA":24,"PRODUCTO":"Coctel Colombia Sunset","ventas":3,"cat":"COCTEL"},
+  {"SEDE":"Viajero Cartagena Centro","FECHA":"2026-06-14","HORA":21,"PRODUCTO":"Coctel Colombia Sunset","ventas":1,"cat":"COCTEL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-13","HORA":22,"PRODUCTO":"Coctel Colombia Sunset","ventas":1,"cat":"COCTEL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-13","HORA":24,"PRODUCTO":"Coctel Colombia Sunset","ventas":2,"cat":"COCTEL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-14","HORA":23,"PRODUCTO":"Coctel Colombia Sunset","ventas":1,"cat":"COCTEL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-11","HORA":17,"PRODUCTO":"Empanadas + Michelob","ventas":1,"cat":"PROMO LOCAL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-15","HORA":12,"PRODUCTO":"Empanadas + Michelob","ventas":1,"cat":"PROMO LOCAL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-15","HORA":18,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":3,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-11","HORA":20,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":1,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-11","HORA":21,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":2,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-14","HORA":19,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":1,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-14","HORA":21,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":1,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-14","HORA":21,"PRODUCTO":"Falafel + Michelob","ventas":2,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-15","HORA":13,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":1,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-15","HORA":18,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":2,"cat":"HAMBURGUESA"},
+];
+
+// ── STATIC CONFIG ─────────────────────────────────────────────────────────
+const SEDES_RANKING = [
+  { name: 'Viajero Santa Marta',       ventas: 10, color: '#c9821a' },
+  { name: 'Viajero Medellín',          ventas: 9,  color: '#1a6b6b' },
+  { name: 'Viajero Cartagena Centro',  ventas: 5,  color: '#c94f3a' },
+  { name: 'Viajero Bogotá',            ventas: 3,  color: '#7c5cbf' },
+  { name: 'Viajero Cali',              ventas: 3,  color: '#2a8a5a' },
+];
+
+const FECHAS_KEYS   = ['2026-06-11','2026-06-12','2026-06-13','2026-06-14','2026-06-15'];
+const FECHAS_LABELS = ['Jun 11','Jun 12','Jun 13','Jun 14','Jun 15'];
+const FECHAS_COLORS = ['#c9821a','#1a6b6b','#c94f3a','#7c5cbf','#2a8a5a'];
+const ALL_HORAS     = [12,13,16,17,18,19,20,21,22,23,24];
+const CAT_LABELS    = ['Cóctel','Hamburguesa','Promo Local'];
+const CAT_KEYS      = ['COCTEL','HAMBURGUESA','PROMO LOCAL'];
+const CAT_COLORS    = ['#c9821a','#1a6b6b','#c94f3a'];
+
+const SEDE_SHORT = {
+  'ALL': 'Todas las sedes',
+  'Viajero Bogota': 'Bogotá',
+  'Viajero Cali': 'Cali',
+  'Viajero Cartagena Centro': 'Cartagena',
+  'Viajero Medellin': 'Medellín',
+  'Viajero Santa Marta': 'Santa Marta',
+};
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+let activeSede = 'ALL';
+
+function filteredRows() {
+  return activeSede === 'ALL'
+    ? ALL_ROWS
+    : ALL_ROWS.filter(r => r.SEDE === activeSede);
+}
+
+// ── STATIC: SEDE RANKING BARS ─────────────────────────────────────────────
+const maxV = Math.max(...SEDES_RANKING.map(s => s.ventas));
+const list = document.getElementById('sedeList');
+SEDES_RANKING.forEach((s, i) => {
+  const pct = (s.ventas / maxV * 100).toFixed(1);
+  const item = document.createElement('div');
+  item.className = 'sede-item';
+  item.innerHTML = `
+    <div>
+      <div class="rank-badge">
+        <span class="rank-num">${String(i+1).padStart(2,'0')}</span>
+        <span class="sede-name">${s.name}</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:0%;background:${s.color}" data-width="${pct}"></div>
+      </div>
+    </div>
+    <div class="sede-count" style="color:${s.color}">${s.ventas}</div>
+  `;
+  list.appendChild(item);
+});
+requestAnimationFrame(() => {
+  document.querySelectorAll('.bar-fill').forEach(el => {
+    setTimeout(() => { el.style.width = el.dataset.width + '%'; }, 120);
+  });
+});
+
+// ── CHART: CATEGORÍA DONUT ────────────────────────────────────────────────
+const catCtx = document.getElementById('catChart').getContext('2d');
+const catChart = new Chart(catCtx, {
+  type: 'doughnut',
+  data: {
+    labels: CAT_LABELS,
+    datasets: [{
+      data: [15, 13, 2],
+      backgroundColor: CAT_COLORS,
+      borderColor: '#ffffff',
+      borderWidth: 3,
+      hoverOffset: 8,
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '62%',
+    plugins: {
+      legend: {
+        position: 'right',
+        labels: {
+          font: { family: 'Inter', size: 12 },
+          padding: 16,
+          usePointStyle: true,
+          pointStyleWidth: 10,
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const total = ctx.dataset.data.reduce((a,b)=>a+b,0);
+            return ` ${ctx.label}: ${ctx.raw} uds (${total > 0 ? (ctx.raw/total*100).toFixed(0) : 0}%)`;
+          },
+        },
+      },
+    },
+  },
+});
+
+// ── CHART: HORA × FECHA LINE ──────────────────────────────────────────────
+function buildLineDatasets(rows) {
+  return FECHAS_KEYS.map((fk, i) => {
+    const pts = rows.filter(r => r.FECHA === fk);
+    const horaMap = {};
+    pts.forEach(p => {
+      horaMap[p.HORA] = (horaMap[p.HORA] || 0) + p.ventas;
+    });
+    return {
+      label: FECHAS_LABELS[i],
+      data: ALL_HORAS.map(h => horaMap[h] ?? null),
+      borderColor: FECHAS_COLORS[i],
+      backgroundColor: FECHAS_COLORS[i] + '22',
+      pointBackgroundColor: FECHAS_COLORS[i],
+      pointRadius: 5,
+      tension: 0.3,
+      spanGaps: false,
+      borderWidth: 2,
+    };
+  });
+}
+
+const hfCtx = document.getElementById('horaFechaChart').getContext('2d');
+const horaChart = new Chart(hfCtx, {
+  type: 'line',
+  data: {
+    labels: ALL_HORAS.map(h => h === 24 ? '00h (sig.)' : `${h}h`),
+    datasets: buildLineDatasets(ALL_ROWS),
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    scales: {
+      x: {
+        grid: { color: '#e8e0d0' },
+        ticks: { font: { family: 'JetBrains Mono', size: 11 } },
+        title: { display: true, text: 'Hora del día', font: { family: 'Inter', size: 11 }, color: '#7a7468' },
+      },
+      y: {
+        beginAtZero: true,
+        grid: { color: '#e8e0d0' },
+        ticks: {
+          stepSize: 1,
+          font: { family: 'JetBrains Mono', size: 11 },
+          callback: v => v % 1 === 0 ? v : '',
+        },
+        title: { display: true, text: 'Unidades vendidas', font: { family: 'Inter', size: 11 }, color: '#7a7468' },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          font: { family: 'Inter', size: 11 },
+          usePointStyle: true,
+          pointStyleWidth: 10,
+          padding: 14,
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.raw != null ? ` ${ctx.dataset.label}: ${ctx.raw} uds` : null,
+          filter: item => item.raw != null,
+        },
+      },
+    },
+  },
+});
+
+// ── UPDATE ALL FILTERED ELEMENTS ──────────────────────────────────────────
+function updateDashboard() {
+  const rows  = filteredRows();
+  const total = rows.reduce((s, r) => s + r.ventas, 0);
+
+  // KPI: total
+  document.getElementById('kpiTotal').textContent = total;
+  document.getElementById('kpiTotalSub').textContent =
+    activeSede === 'ALL' ? 'todas las sedes' : SEDE_SHORT[activeSede];
+  document.getElementById('headerTotal').textContent = total;
+
+  // KPI: mejor fecha
+  const byFecha = {};
+  rows.forEach(r => { byFecha[r.FECHA] = (byFecha[r.FECHA] || 0) + r.ventas; });
+  const bestFecha = Object.entries(byFecha).sort((a,b)=>b[1]-a[1])[0];
+  if (bestFecha) {
+    const fIdx = FECHAS_KEYS.indexOf(bestFecha[0]);
+    document.getElementById('kpiFecha').textContent = fIdx >= 0 ? FECHAS_LABELS[fIdx] : bestFecha[0];
+    document.getElementById('kpiFechaSub').textContent = `${bestFecha[1]} unidades`;
+  } else {
+    document.getElementById('kpiFecha').textContent = '—';
+    document.getElementById('kpiFechaSub').textContent = 'sin datos';
+  }
+
+  // KPI: hora pico
+  const byHora = {};
+  rows.forEach(r => { byHora[r.HORA] = (byHora[r.HORA] || 0) + r.ventas; });
+  const bestHora = Object.entries(byHora).sort((a,b)=>b[1]-a[1])[0];
+  if (bestHora) {
+    document.getElementById('kpiHora').textContent = bestHora[0] == 24 ? '00h' : `${bestHora[0]}h`;
+    document.getElementById('kpiHoraSub').textContent = `${bestHora[1]} unidades`;
+  } else {
+    document.getElementById('kpiHora').textContent = '—';
+    document.getElementById('kpiHoraSub').textContent = 'sin datos';
+  }
+
+  // KPI: categoría líder
+  const byCat = {};
+  rows.forEach(r => { byCat[r.cat] = (byCat[r.cat] || 0) + r.ventas; });
+  const bestCat = Object.entries(byCat).sort((a,b)=>b[1]-a[1])[0];
+  const catNameMap = { COCTEL: 'Cóctel', HAMBURGUESA: 'Hamburgesa', 'PROMO LOCAL': 'Promo' };
+  if (bestCat) {
+    document.getElementById('kpiCat').textContent = catNameMap[bestCat[0]] || bestCat[0];
+    document.getElementById('kpiCatSub').textContent =
+      `${bestCat[1]} uds · ${total > 0 ? (bestCat[1]/total*100).toFixed(0) : 0}%`;
+  } else {
+    document.getElementById('kpiCat').textContent = '—';
+    document.getElementById('kpiCatSub').textContent = 'sin datos';
+  }
+
+  // DONUT: categoría
+  const catData = CAT_KEYS.map(k => byCat[k] || 0);
+  catChart.data.datasets[0].data = catData;
+  catChart.update('active');
+
+  // FILTER TAGS
+  const isFiltered = activeSede !== 'ALL';
+  const tagText = isFiltered ? SEDE_SHORT[activeSede] : '';
+  const catTag = document.getElementById('catTag');
+  const horaTag = document.getElementById('horaTag');
+  catTag.textContent = tagText;
+  horaTag.textContent = tagText;
+  catTag.classList.toggle('visible', isFiltered);
+  horaTag.classList.toggle('visible', isFiltered);
+
+  // LINE CHART: hora × fecha
+  const newDatasets = buildLineDatasets(rows);
+  horaChart.data.datasets = newDatasets;
+  horaChart.update('active');
+}
+
+// ── FILTER BUTTONS ────────────────────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeSede = btn.dataset.sede;
+    updateDashboard();
+  });
+});
+
+// Init
+updateDashboard();
+</script>
+</body>
+</html>
