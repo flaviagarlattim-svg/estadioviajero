@@ -65,9 +65,10 @@
 
   /* FILTER BAR */
   .filter-bar {
-    background: var(--ink);
-    border-top: 1px solid #2a2924;
-    padding: 12px 40px;
+    background: #ffffff;
+    border-top: 1px solid #f0ece4;
+    border-bottom: 1px solid #f0ece4;
+    padding: 10px 40px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -77,17 +78,17 @@
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: var(--muted);
-    font-weight: 600;
+    color: var(--amber);
+    font-weight: 700;
     white-space: nowrap;
     margin-right: 4px;
   }
   .filter-btn {
     padding: 5px 14px;
-    border-radius: 2px;
-    border: 1px solid #3a3830;
+    border-radius: 20px;
+    border: 1.5px solid #f0c9b0;
     background: transparent;
-    color: var(--sand);
+    color: var(--amber);
     font-family: 'Inter', sans-serif;
     font-size: 11px;
     font-weight: 500;
@@ -96,17 +97,17 @@
     white-space: nowrap;
     letter-spacing: 0.2px;
   }
-  .filter-btn:hover { border-color: var(--amber); color: var(--amber-light); }
+  .filter-btn:hover { border-color: var(--amber); background: #fff5ef; }
   .filter-btn.active {
     background: var(--amber);
     border-color: var(--amber);
-    color: var(--ink);
+    color: #ffffff;
     font-weight: 600;
   }
   .filter-divider {
     width: 1px;
     height: 18px;
-    background: #3a3830;
+    background: #f0ece4;
     margin: 0 4px;
   }
 
@@ -265,12 +266,12 @@
     <div>
       <div style="font-size:10px;letter-spacing:2px;color:#bbb;font-family:'JetBrains Mono',monospace;margin-bottom:4px;">REPORTE DE VENTAS</div>
       <h1>Venta <em>Mundial</em></h1>
-      <div style="font-size:11px;color:#bbb;margin-top:4px;font-family:'Inter',sans-serif;">Jun 11 – Jun 15, 2026 · Cadena Viajero Colombia</div>
+      <div style="font-size:11px;color:#bbb;margin-top:4px;font-family:'Inter',sans-serif;">Jun 11 – Jun 16, 2026 · Cadena Viajero Colombia</div>
     </div>
   </div>
   <div class="header-meta">
     TOTAL UNIDADES<br>
-    <strong id="headerTotal">30</strong>
+    <strong id="headerTotal">60</strong>
     Jun 11 – Jun 15, 2026
   </div>
 </header>
@@ -285,6 +286,7 @@
   <button class="filter-btn" data-sede="Viajero Cartagena Centro">Cartagena</button>
   <button class="filter-btn" data-sede="Viajero Medellin">Medellín</button>
   <button class="filter-btn" data-sede="Viajero Santa Marta">Santa Marta</button>
+  <button class="filter-btn" data-sede="Viajero Getsemani">Getsemaní</button>
 </div>
 
 <!-- KPI ROW -->
@@ -341,7 +343,7 @@
   <div class="card card-wide">
     <div class="card-header">
       <h2>Ventas por Hora y Fecha</h2>
-      <span>Jun 11 – Jun 15, 2026</span>
+      <span>Jun 11 – Jun 16, 2026</span>
       <span class="filter-tag" id="horaTag"></span>
     </div>
     <div class="card-body" style="height:280px;">
@@ -376,21 +378,36 @@ const ALL_ROWS = [
   {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-14","HORA":21,"PRODUCTO":"Falafel + Michelob","ventas":2,"cat":"HAMBURGUESA"},
   {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-15","HORA":13,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":1,"cat":"HAMBURGUESA"},
   {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-15","HORA":18,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":2,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Getsemani","FECHA":"2026-06-16","HORA":23,"PRODUCTO":"Coctel Colombia Sunset","ventas":1,"cat":"COCTEL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-16","HORA":21,"PRODUCTO":"Coctel Colombia Sunset","ventas":1,"cat":"COCTEL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-16","HORA":23,"PRODUCTO":"Coctel Colombia Sunset","ventas":6,"cat":"COCTEL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-16","HORA":23,"PRODUCTO":"Coctel Colombia Sunset","ventas":3,"cat":"COCTEL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-16","HORA":24,"PRODUCTO":"Coctel Colombia Sunset","ventas":1,"cat":"COCTEL"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-16","HORA":19,"PRODUCTO":"Coctel Colombia Sunset","ventas":1,"cat":"COCTEL"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-16","HORA":19,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":1,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-16","HORA":20,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":5,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-16","HORA":20,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":2,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-16","HORA":12,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":1,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-16","HORA":14,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":2,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-16","HORA":19,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":2,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-16","HORA":20,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":3,"cat":"HAMBURGUESA"},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-16","HORA":21,"PRODUCTO":"Cheese and Bacon + Michelob","ventas":1,"cat":"HAMBURGUESA"},
 ];
 
 // ── STATIC CONFIG ─────────────────────────────────────────────────────────
 const SEDES_RANKING = [
-  { name: 'Viajero Santa Marta',       ventas: 10, color: '#c9821a' },
-  { name: 'Viajero Medellín',          ventas: 9,  color: '#1a6b6b' },
+  { name: 'Viajero Medellín',          ventas: 28, color: '#c9821a' },
+  { name: 'Viajero Santa Marta',       ventas: 20, color: '#1a6b6b' },
   { name: 'Viajero Cartagena Centro',  ventas: 5,  color: '#c94f3a' },
   { name: 'Viajero Bogotá',            ventas: 3,  color: '#7c5cbf' },
   { name: 'Viajero Cali',              ventas: 3,  color: '#2a8a5a' },
+  { name: 'Viajero Getsemaní',         ventas: 1,  color: '#2a7a8a' },
 ];
 
-const FECHAS_KEYS   = ['2026-06-11','2026-06-12','2026-06-13','2026-06-14','2026-06-15'];
-const FECHAS_LABELS = ['Jun 11','Jun 12','Jun 13','Jun 14','Jun 15'];
-const FECHAS_COLORS = ['#c9821a','#1a6b6b','#c94f3a','#7c5cbf','#2a8a5a'];
-const ALL_HORAS     = [12,13,16,17,18,19,20,21,22,23,24];
+const FECHAS_KEYS   = ['2026-06-11','2026-06-12','2026-06-13','2026-06-14','2026-06-15','2026-06-16'];
+const FECHAS_LABELS = ['Jun 11','Jun 12','Jun 13','Jun 14','Jun 15','Jun 16'];
+const FECHAS_COLORS = ['#c9821a','#1a6b6b','#c94f3a','#7c5cbf','#2a8a5a','#2a7a8a'];
+const ALL_HORAS     = [12,13,14,16,17,18,19,20,21,22,23,24];
 const CAT_LABELS    = ['Cóctel','Hamburguesa','Promo Local'];
 const CAT_KEYS      = ['COCTEL','HAMBURGUESA','PROMO LOCAL'];
 const CAT_COLORS    = ['#c9821a','#1a6b6b','#c94f3a'];
@@ -402,6 +419,7 @@ const SEDE_SHORT = {
   'Viajero Cartagena Centro': 'Cartagena',
   'Viajero Medellin': 'Medellín',
   'Viajero Santa Marta': 'Santa Marta',
+  'Viajero Getsemani': 'Getsemaní',
 };
 
 // ── STATE ─────────────────────────────────────────────────────────────────
