@@ -84,10 +84,10 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
     <strong>Performance AyB — Dashboard de Ventas</strong>
     <span>Colombia · Alimentos &amp; Bebidas</span>
   </div>
-  <div class="hdr-date">Jun 11 – Jun 17, 2026</div>
+  <div class="hdr-date">Jun 11 – Jun 18, 2026</div>
   <div class="hdr-total">
     <div class="t-label">Total Ventas</div>
-    <div class="t-value" id="kpiVentaHdr">$2.4M</div>
+    <div class="t-value" id="kpiVentaHdr">$3.8M</div>
     <div class="t-sub">COP · todas las sedes</div>
   </div>
 </header>
@@ -104,34 +104,35 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
   <button class="filter-btn" data-sede="Viajero Santa Marta">Santa Marta</button>
   <button class="filter-btn" data-sede="Viajero Getsemani">Getsemaní</button>
   <button class="filter-btn" data-sede="Viajero Guatape">Guatapé</button>
+  <button class="filter-btn" data-sede="Viajero Tayrona">Tayrona</button>
 </div>
 
 <!-- KPI ROW -->
 <div class="kpi-row">
   <div class="kpi">
     <div class="kpi-label">Total unidades</div>
-    <div class="kpi-value" id="kpiTotal">79</div>
+    <div class="kpi-value" id="kpiTotal">124</div>
     <div class="kpi-sub" id="kpiTotalSub">todas las sedes</div>
   </div>
   <div class="kpi">
     <div class="kpi-label">Total ventas</div>
-    <div class="kpi-value" id="kpiVenta">$2.4M</div>
-    <div class="kpi-sub" id="kpiVentaSub">COP · Jun 11–17</div>
+    <div class="kpi-value" id="kpiVenta">$3.8M</div>
+    <div class="kpi-sub" id="kpiVentaSub">COP · Jun 11–18</div>
   </div>
   <div class="kpi">
     <div class="kpi-label">Mejor fecha</div>
-    <div class="kpi-value" id="kpiFecha">Jun 16</div>
-    <div class="kpi-sub" id="kpiFechaSub">30 uds · $919.000</div>
+    <div class="kpi-value" id="kpiFecha">Jun 18</div>
+    <div class="kpi-sub" id="kpiFechaSub">45 uds · $1.336.000</div>
   </div>
   <div class="kpi">
     <div class="kpi-label">Hora pico</div>
-    <div class="kpi-value" id="kpiHora">20h</div>
-    <div class="kpi-sub" id="kpiHoraSub">12 unidades</div>
+    <div class="kpi-value" id="kpiHora">23h</div>
+    <div class="kpi-sub" id="kpiHoraSub">21 unidades</div>
   </div>
   <div class="kpi">
     <div class="kpi-label">Categoría líder</div>
     <div class="kpi-value" id="kpiCat">Hambur.</div>
-    <div class="kpi-sub" id="kpiCatSub">47 uds · $1.646.000</div>
+    <div class="kpi-sub" id="kpiCatSub">65 uds · $2.301.000</div>
   </div>
 </div>
 
@@ -172,7 +173,7 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
   <div class="card">
     <div class="card-header">
       <h2>Ventas COP por Fecha</h2>
-      <span class="sub">Jun 11 – Jun 17</span>
+      <span class="sub">Jun 11 – Jun 18</span>
       <span class="filter-tag" id="ventaFechaTag"></span>
     </div>
     <div class="card-body" style="height:240px;">
@@ -184,7 +185,7 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
   <div class="card card-wide">
     <div class="card-header">
       <h2>Unidades por Hora y Fecha</h2>
-      <span class="sub">Jun 11 – Jun 17, 2026</span>
+      <span class="sub">Jun 11 – Jun 18, 2026</span>
       <span class="filter-tag" id="horaTag"></span>
     </div>
     <div class="card-body" style="height:260px;">
@@ -194,7 +195,7 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
 
 </div>
 
-<footer>VENTA_MUNDIAL.xlsx · Jun 11–17, 2026 · 47 registros · Viajero Colombia</footer>
+<footer>VENTA_MUNDIAL.xlsx · Jun 11–18, 2026 · 65 registros · Viajero Colombia</footer>
 
 <script>
 // ── RAW DATA ──────────────────────────────────────────────────────────────
@@ -243,26 +244,45 @@ const ALL_ROWS = [
   {"SEDE":"Viajero Medellin","FECHA":"2026-06-17","HORA":17,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":36000},
   {"SEDE":"Viajero Medellin","FECHA":"2026-06-17","HORA":18,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":36000},
   {"SEDE":"Viajero Medellin","FECHA":"2026-06-17","HORA":19,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":36000},
-  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-17","HORA":12,"PRODUCTO":"Salchipapas + Michelob","UNIDADES":2,"cat":"PROMO LOCAL","VENTA":0},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-17","HORA":12,"PRODUCTO":"Salchipapas + Michelob","UNIDADES":2,"cat":"PROMO LOCAL","VENTA":60000},
   {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-17","HORA":12,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":2,"cat":"HAMBURGUESA","VENTA":68000},
   {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-17","HORA":19,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":34000},
+  {"SEDE":"Viajero Bogota","FECHA":"2026-06-18","HORA":18,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":1,"cat":"COCTEL","VENTA":25000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-18","HORA":19,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":2,"cat":"COCTEL","VENTA":50000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-18","HORA":22,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":3,"cat":"COCTEL","VENTA":75000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-18","HORA":23,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":8,"cat":"COCTEL","VENTA":200000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-18","HORA":24,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":6,"cat":"COCTEL","VENTA":150000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-18","HORA":11,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":1,"cat":"COCTEL","VENTA":25000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-18","HORA":16,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":2,"cat":"COCTEL","VENTA":50000},
+  {"SEDE":"Viajero Cartagena Centro","FECHA":"2026-06-18","HORA":19,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":38000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-18","HORA":13,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":3,"cat":"HAMBURGUESA","VENTA":108000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-18","HORA":16,"PRODUCTO":"Empanadas + Michelob","UNIDADES":2,"cat":"PROMO LOCAL","VENTA":50000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-18","HORA":20,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":7,"cat":"HAMBURGUESA","VENTA":252000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-18","HORA":20,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":36000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-18","HORA":21,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":36000},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-18","HORA":21,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":34000},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-18","HORA":19,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":34000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-18","HORA":14,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":2,"cat":"HAMBURGUESA","VENTA":78000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-18","HORA":14,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":39000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-18","HORA":19,"PRODUCTO":"Popcorn Chicken + Michelob","UNIDADES":2,"cat":"PROMO LOCAL","VENTA":56000},
 ];
 
 // ── STATIC CONFIG ─────────────────────────────────────────────────────────
 const SEDES_RANKING_U = [
-  {name:'Viajero Medellín',   u:39,  v:1217000, color:'#e84b1a'},
-  {name:'Viajero Santa Marta',u:25,  v:765000,  color:'#1a6b6b'},
-  {name:'Viajero Cartagena',  u:7,   v:201000,  color:'#c9821a'},
+  {name:'Viajero Medellín',   u:72,  v:2174000, color:'#e84b1a'},
+  {name:'Viajero Santa Marta',u:27,  v:893000,  color:'#1a6b6b'},
+  {name:'Viajero Tayrona',    u:8,   v:248000,  color:'#9b4fc9'},
+  {name:'Viajero Cartagena',  u:8,   v:239000,  color:'#c9821a'},
+  {name:'Viajero Bogotá',     u:4,   v:100000,  color:'#c94f3a'},
   {name:'Viajero Cali',       u:3,   v:75000,   color:'#7c5cbf'},
-  {name:'Viajero Bogotá',     u:3,   v:75000,   color:'#c94f3a'},
   {name:'Viajero Guatapé',    u:1,   v:38000,   color:'#2a8a5a'},
   {name:'Viajero Getsemaní',  u:1,   v:25000,   color:'#2a7a8a'},
 ];
 
-const FECHAS_KEYS   = ['2026-06-11','2026-06-12','2026-06-13','2026-06-14','2026-06-15','2026-06-16','2026-06-17'];
-const FECHAS_LABELS = ['Jun 11','Jun 12','Jun 13','Jun 14','Jun 15','Jun 16','Jun 17'];
-const FECHAS_COLORS = ['#e84b1a','#1a6b6b','#c94f3a','#7c5cbf','#2a8a5a','#c9821a','#2a7a8a'];
-const ALL_HORAS     = [12,13,14,15,16,17,18,19,20,21,22,23,24];
+const FECHAS_KEYS   = ['2026-06-11','2026-06-12','2026-06-13','2026-06-14','2026-06-15','2026-06-16','2026-06-17','2026-06-18'];
+const FECHAS_LABELS = ['Jun 11','Jun 12','Jun 13','Jun 14','Jun 15','Jun 16','Jun 17','Jun 18'];
+const FECHAS_COLORS = ['#e84b1a','#1a6b6b','#c94f3a','#7c5cbf','#2a8a5a','#c9821a','#2a7a8a','#9b4fc9'];
+const ALL_HORAS     = [11,12,13,14,15,16,17,18,19,20,21,22,23,24];
 const CAT_LABELS    = ['Hamburguesa','Cóctel','Promo Local'];
 const CAT_KEYS      = ['HAMBURGUESA','COCTEL','PROMO LOCAL'];
 const CAT_COLORS    = ['#e84b1a','#1a6b6b','#c9821a'];
@@ -272,7 +292,7 @@ const SEDE_SHORT = {
   'Viajero Bogota':'Bogotá','Viajero Cali':'Cali',
   'Viajero Cartagena Centro':'Cartagena','Viajero Medellin':'Medellín',
   'Viajero Santa Marta':'Santa Marta','Viajero Getsemani':'Getsemaní',
-  'Viajero Guatape':'Guatapé'
+  'Viajero Guatape':'Guatapé','Viajero Tayrona':'Tayrona'
 };
 
 // ── STATE ─────────────────────────────────────────────────────────────────
@@ -319,7 +339,7 @@ const catChart = new Chart(catCtx,{
   type:'doughnut',
   data:{
     labels:CAT_LABELS,
-    datasets:[{data:[47,28,4],backgroundColor:CAT_COLORS,borderColor:'#fff',borderWidth:3,hoverOffset:8}]
+    datasets:[{data:[65,51,8],backgroundColor:CAT_COLORS,borderColor:'#fff',borderWidth:3,hoverOffset:8}]
   },
   options:{
     responsive:true,maintainAspectRatio:false,cutout:'60%',
@@ -341,7 +361,7 @@ const ventaFechaChart = new Chart(vfCtx,{
     labels:FECHAS_LABELS,
     datasets:[{
       label:'Ventas COP',
-      data:[202000,125000,100000,178000,260000,919000,612000],
+      data:[202000,125000,100000,178000,260000,919000,672000,1336000],
       backgroundColor: FECHAS_COLORS.map(c=>c+'cc'),
       borderColor: FECHAS_COLORS,
       borderWidth:2,borderRadius:4,
