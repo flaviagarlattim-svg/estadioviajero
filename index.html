@@ -953,13 +953,15 @@ function updateP3Highlight(){
     var hs=p[2], he=p[3];
     var horaStr=hs+"h - "+he+"h";
     var isBest=bestPartidos[p[1]];
+    var partV=ventaPorPartido[p[1]]||0;
     var div=document.createElement("div");
     div.style.cssText="display:flex;align-items:center;gap:7px"+(isBest?";background:rgba(253,200,80,0.1);border-radius:6px;padding:3px 6px;margin:-3px -6px":"");
     div.innerHTML=
       "<span style='width:8px;height:8px;border-radius:50%;background:"+col+";flex-shrink:0;display:inline-block'></span>"+
       "<span style='font-size:11px;color:"+(isBest?"#fff":"#ccc")+";font-family:Inter,sans-serif;flex:1;font-weight:"+(isBest?"600":"400")+"'>"+p[1]+"</span>"+
-      (isBest?"<span style='font-size:12px' title='Mayor venta en este partido'>&#11088;</span>":"")+
-      "<span style='font-size:10px;color:"+col+";font-family:JetBrains Mono,monospace;white-space:nowrap;font-weight:600'>"+horaStr+"</span>";
+      (isBest?"<span style='font-size:11px' title='Mayor venta'>&#11088;</span>":"")+
+      "<span style='font-size:10px;color:"+col+";font-family:JetBrains Mono,monospace;white-space:nowrap;font-weight:600'>"+hs+"h-"+he+"h</span>"+
+      "<span style='font-size:10px;color:"+(isBest?"#fbbf24":"#888")+";font-family:JetBrains Mono,monospace;white-space:nowrap;font-weight:"+(isBest?"700":"400")+";min-width:60px;text-align:right'>"+fmtM(partV)+"</span>";
     pEl.appendChild(div);
   });
   if(!pEl.children.length){
