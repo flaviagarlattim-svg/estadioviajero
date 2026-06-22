@@ -84,10 +84,10 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
     <strong>Performance AyB — Dashboard de Ventas</strong>
     <span>Colombia · Alimentos &amp; Bebidas</span>
   </div>
-  <div class="hdr-date">Jun 11 – Jun 19, 2026</div>
+  <div class="hdr-date">Jun 11 – Jun 21, 2026</div>
   <div class="hdr-total">
     <div class="t-label">Total Ventas</div>
-    <div class="t-value" id="kpiVentaHdr">$6.2M</div>
+    <div class="t-value" id="kpiVentaHdr">$7.7M</div>
     <div class="t-sub">COP · todas las sedes</div>
   </div>
 </header>
@@ -111,13 +111,13 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
 <div class="kpi-row">
   <div class="kpi">
     <div class="kpi-label">Total unidades</div>
-    <div class="kpi-value" id="kpiTotal">211</div>
+    <div class="kpi-value" id="kpiTotal">255</div>
     <div class="kpi-sub" id="kpiTotalSub">todas las sedes</div>
   </div>
   <div class="kpi">
     <div class="kpi-label">Total ventas</div>
-    <div class="kpi-value" id="kpiVenta">$6.2M</div>
-    <div class="kpi-sub" id="kpiVentaSub">COP · Jun 11–19</div>
+    <div class="kpi-value" id="kpiVenta">$7.7M</div>
+    <div class="kpi-sub" id="kpiVentaSub">COP · Jun 11–21</div>
   </div>
   <div class="kpi">
     <div class="kpi-label">Mejor fecha</div>
@@ -127,12 +127,12 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
   <div class="kpi">
     <div class="kpi-label">Hora pico</div>
     <div class="kpi-value" id="kpiHora">23h</div>
-    <div class="kpi-sub" id="kpiHoraSub">27 unidades</div>
+    <div class="kpi-sub" id="kpiHoraSub">30 unidades</div>
   </div>
   <div class="kpi">
     <div class="kpi-label">Categoría líder</div>
     <div class="kpi-value" id="kpiCat">Cóctel</div>
-    <div class="kpi-sub" id="kpiCatSub">113 uds · $2.825.000</div>
+    <div class="kpi-sub" id="kpiCatSub">123 uds · $3.075.000</div>
   </div>
 </div>
 
@@ -173,7 +173,7 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
   <div class="card">
     <div class="card-header">
       <h2>Ventas COP por Fecha</h2>
-      <span class="sub">Jun 11 – Jun 19</span>
+      <span class="sub">Jun 11 – Jun 21</span>
       <span class="filter-tag" id="ventaFechaTag"></span>
     </div>
     <div class="card-body" style="height:240px;">
@@ -185,7 +185,7 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
   <div class="card card-wide">
     <div class="card-header">
       <h2>Unidades por Hora y Fecha</h2>
-      <span class="sub">Jun 11 – Jun 19, 2026</span>
+      <span class="sub">Jun 11 – Jun 21, 2026</span>
       <span class="filter-tag" id="horaTag"></span>
     </div>
     <div class="card-body" style="height:260px;">
@@ -195,7 +195,7 @@ footer{text-align:center;padding:18px;font-size:10px;color:var(--muted);font-fam
 
 </div>
 
-<footer>VENTA_MUNDIAL.xlsx · Jun 11–19, 2026 · 105 registros · Viajero Colombia</footer>
+<footer>VENTA_MUNDIAL.xlsx · Jun 11–21, 2026 · 131 registros · Viajero Colombia</footer>
 
 <script>
 // ── RAW DATA ──────────────────────────────────────────────────────────────
@@ -305,23 +305,49 @@ const ALL_ROWS = [
   {"SEDE":"Viajero Tayrona","FECHA":"2026-06-19","HORA":15,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":39000},
   {"SEDE":"Viajero Tayrona","FECHA":"2026-06-19","HORA":18,"PRODUCTO":"Popcorn Chicken + Michelob","UNIDADES":1,"cat":"PROMO LOCAL","VENTA":28000},
   {"SEDE":"Viajero Tayrona","FECHA":"2026-06-19","HORA":18,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":39000},
+  {"SEDE":"Viajero Cartagena Centro","FECHA":"2026-06-20","HORA":13,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":1,"cat":"COCTEL","VENTA":25000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-20","HORA":14,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":3,"cat":"COCTEL","VENTA":75000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-20","HORA":15,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":4,"cat":"COCTEL","VENTA":100000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-20","HORA":17,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":1,"cat":"COCTEL","VENTA":25000},
+  {"SEDE":"Viajero Cali","FECHA":"2026-06-20","HORA":20,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":36000},
+  {"SEDE":"Viajero Cartagena Centro","FECHA":"2026-06-20","HORA":18,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":2,"cat":"HAMBURGUESA","VENTA":76000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-20","HORA":12,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":36000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-20","HORA":13,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":36000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-20","HORA":13,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":2,"cat":"HAMBURGUESA","VENTA":78000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-20","HORA":15,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":39000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-20","HORA":15,"PRODUCTO":"Popcorn Chicken + Michelob","UNIDADES":2,"cat":"PROMO LOCAL","VENTA":56000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-20","HORA":18,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":39000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-20","HORA":19,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":4,"cat":"HAMBURGUESA","VENTA":156000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-20","HORA":20,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":5,"cat":"HAMBURGUESA","VENTA":195000},
+  {"SEDE":"Viajero Santa Marta","FECHA":"2026-06-21","HORA":16,"PRODUCTO":"Coctel Colombia Sunset","UNIDADES":1,"cat":"COCTEL","VENTA":25000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-21","HORA":13,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":36000},
+  {"SEDE":"Viajero Medellin","FECHA":"2026-06-21","HORA":20,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":36000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-21","HORA":13,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":39000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-21","HORA":15,"PRODUCTO":"Popcorn Chicken + Michelob","UNIDADES":1,"cat":"PROMO LOCAL","VENTA":28000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-21","HORA":17,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":39000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-21","HORA":17,"PRODUCTO":"Popcorn Chicken + Michelob","UNIDADES":1,"cat":"PROMO LOCAL","VENTA":28000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-21","HORA":18,"PRODUCTO":"Popcorn Chicken + Michelob","UNIDADES":1,"cat":"PROMO LOCAL","VENTA":28000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-21","HORA":19,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":39000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-21","HORA":19,"PRODUCTO":"Popcorn Chicken + Michelob","UNIDADES":4,"cat":"PROMO LOCAL","VENTA":112000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-21","HORA":20,"PRODUCTO":"Cheese and Bacon + Michelob","UNIDADES":1,"cat":"HAMBURGUESA","VENTA":39000},
+  {"SEDE":"Viajero Tayrona","FECHA":"2026-06-21","HORA":20,"PRODUCTO":"Popcorn Chicken + Michelob","UNIDADES":1,"cat":"PROMO LOCAL","VENTA":28000},
 ];
 
 // ── STATIC CONFIG ─────────────────────────────────────────────────────────
 const SEDES_RANKING_U = [
-  {name:'Viajero Medellín',   u:113, v:3232000, color:'#e84b1a'},
-  {name:'Viajero Tayrona',    u:36,  v:1105000, color:'#9b4fc9'},
-  {name:'Viajero Santa Marta',u:30,  v:983000,  color:'#1a6b6b'},
-  {name:'Viajero Cartagena',  u:21,  v:616000,  color:'#c9821a'},
+  {name:'Viajero Medellín',   u:117, v:3376000, color:'#e84b1a'},
+  {name:'Viajero Tayrona',    u:71,  v:2248000, color:'#9b4fc9'},
+  {name:'Viajero Santa Marta',u:31,  v:1008000, color:'#1a6b6b'},
+  {name:'Viajero Cartagena',  u:24,  v:717000,  color:'#c9821a'},
   {name:'Viajero Bogotá',     u:5,   v:125000,  color:'#c94f3a'},
-  {name:'Viajero Cali',       u:3,   v:75000,   color:'#7c5cbf'},
+  {name:'Viajero Cali',       u:4,   v:111000,  color:'#7c5cbf'},
   {name:'Viajero Getsemaní',  u:2,   v:68000,   color:'#2a7a8a'},
   {name:'Viajero Guatapé',    u:1,   v:38000,   color:'#2a8a5a'},
 ];
 
-const FECHAS_KEYS   = ['2026-06-11','2026-06-12','2026-06-13','2026-06-14','2026-06-15','2026-06-16','2026-06-17','2026-06-18','2026-06-19'];
-const FECHAS_LABELS = ['Jun 11','Jun 12','Jun 13','Jun 14','Jun 15','Jun 16','Jun 17','Jun 18','Jun 19'];
-const FECHAS_COLORS = ['#e84b1a','#1a6b6b','#c94f3a','#7c5cbf','#2a8a5a','#c9821a','#2a7a8a','#9b4fc9','#d4a017'];
+const FECHAS_KEYS   = ['2026-06-11','2026-06-12','2026-06-13','2026-06-14','2026-06-15','2026-06-16','2026-06-17','2026-06-18','2026-06-19','2026-06-20','2026-06-21'];
+const FECHAS_LABELS = ['Jun 11','Jun 12','Jun 13','Jun 14','Jun 15','Jun 16','Jun 17','Jun 18','Jun 19','Jun 20','Jun 21'];
+const FECHAS_COLORS = ['#e84b1a','#1a6b6b','#c94f3a','#7c5cbf','#2a8a5a','#c9821a','#2a7a8a','#9b4fc9','#d4a017','#4a90d9','#2ecc71'];
 const ALL_HORAS     = [11,12,13,14,15,16,17,18,19,20,21,22,23,24];
 const CAT_LABELS    = ['Hamburguesa','Cóctel','Promo Local'];
 const CAT_KEYS      = ['HAMBURGUESA','COCTEL','PROMO LOCAL'];
@@ -379,7 +405,7 @@ const catChart = new Chart(catCtx,{
   type:'doughnut',
   data:{
     labels:CAT_LABELS,
-    datasets:[{data:[113,86,12],backgroundColor:CAT_COLORS,borderColor:'#fff',borderWidth:3,hoverOffset:8}]
+    datasets:[{data:[123,110,22],backgroundColor:CAT_COLORS,borderColor:'#fff',borderWidth:3,hoverOffset:8}]
   },
   options:{
     responsive:true,maintainAspectRatio:false,cutout:'60%',
@@ -401,7 +427,7 @@ const ventaFechaChart = new Chart(vfCtx,{
     labels:FECHAS_LABELS,
     datasets:[{
       label:'Ventas COP',
-      data:[202000,125000,100000,178000,260000,919000,672000,1336000,2450000],
+      data:[202000,125000,100000,178000,260000,919000,672000,1336000,2450000,972000,477000],
       backgroundColor: FECHAS_COLORS.map(c=>c+'cc'),
       borderColor: FECHAS_COLORS,
       borderWidth:2,borderRadius:4,
