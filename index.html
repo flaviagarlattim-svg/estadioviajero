@@ -164,6 +164,41 @@ footer{text-align:center;padding:14px;font-size:10px;color:var(--mu);font-family
     <button class="fd-btn" data-f="2026-06-20"><span class="dw">SAB</span><span class="dn">20</span><span class="dm">Jun</span></button>
     <button class="fd-btn" data-f="2026-06-21"><span class="dw">DOM</span><span class="dn">21</span><span class="dm">Jun</span></button>
   </div>
+
+  <!-- HIGHLIGHT: mejor dia y partido -->
+  <div style="padding:14px 30px 0">
+    <div id="p3highlight" style="background:linear-gradient(135deg,#0f0e0c 0%,#1e1a2e 60%,#0f0e0c 100%);border-radius:10px;border:2px solid #e84b1a;padding:18px 24px;display:grid;grid-template-columns:auto 1fr 1fr 1.4fr 1.2fr;gap:0;align-items:start">
+
+      <!-- Emoji -->
+      <div style="font-size:2.4rem;padding-right:20px;display:flex;align-items:center;align-self:center">&#127942;</div>
+
+      <!-- Fecha + total -->
+      <div style="padding-right:20px;border-right:1px solid #2a2a2a">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#666;font-family:'JetBrains Mono',monospace;margin-bottom:5px">Mejor d&iacute;a</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:1.5rem;color:#fff;line-height:1.15" id="p3h-fecha">—</div>
+        <div style="font-size:10px;color:#888;margin-top:3px;font-family:Inter,sans-serif" id="p3h-sede">todas las sedes</div>
+        <div style="margin-top:12px">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#666;font-family:'JetBrains Mono',monospace;margin-bottom:4px">Venta sin IVA</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.4rem;color:#e84b1a;line-height:1" id="p3h-venta">—</div>
+          <div style="font-size:10px;color:#888;margin-top:2px;font-family:'JetBrains Mono',monospace" id="p3h-uds">— unidades</div>
+        </div>
+      </div>
+
+      <!-- Partidos con horas -->
+      <div style="padding:0 20px;border-right:1px solid #2a2a2a">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#666;font-family:'JetBrains Mono',monospace;margin-bottom:8px">Partidos del d&iacute;a</div>
+        <div id="p3h-partidos" style="display:flex;flex-direction:column;gap:5px"></div>
+      </div>
+
+      <!-- Top 3 sedes -->
+      <div style="padding-left:20px">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#666;font-family:'JetBrains Mono',monospace;margin-bottom:8px">Top 3 sedes ese d&iacute;a</div>
+        <div id="p3h-sedes" style="display:flex;flex-direction:column;gap:7px"></div>
+      </div>
+
+    </div>
+  </div>
+
   <div class="gr">
     <div class="card cw"><div class="ch"><h2>Ingresos por Franja Horaria &mdash; Sin IVA</h2><span class="ft on" id="t3h" style="display:inline-block">Todas las sedes</span><div class="pleg"><span class="pdot" style="background:linear-gradient(90deg,#fbbf24,#60a5fa,#34d399,#f87171,#a78bfa);"></span>&nbsp;Partido en curso &middot; click para filtrar GROUP</div></div><div class="cb" style="height:320px"><canvas id="c3hora"></canvas></div></div>
     <div class="card cw"><div class="ch"><h2>% Participaci&oacute;n en Ingreso por GROUP</h2><span class="cs">Venta sin IVA &middot; columna CATEGOR&Iacute;A</span><span class="ft" id="t3g"></span><span id="partidoBadge" style="display:none;margin-left:auto;font-size:10px;font-family:JetBrains Mono,monospace;border-radius:12px;padding:3px 10px;border:1.5px solid;cursor:pointer;font-weight:600;align-items:center;gap:5px"></span></div><div class="cb" style="height:400px;display:flex;align-items:center"><canvas id="c3group"></canvas></div></div>
@@ -839,6 +874,7 @@ function initAll(){
   kpi("g2",rm,"p2");
   mkBarHora(ALL_ROWS,"ALL");
   mkGroup(getGroupRows());
+  updateP3Highlight();
 }
 
 function upMundial(){
@@ -854,6 +890,113 @@ function upMundial(){
     return{label:FL[i],data:AH.map(function(h){return hm[h]!==undefined?hm[h]:null;}),borderColor:FC[i],backgroundColor:FC[i]+"22",pointBackgroundColor:FC[i],pointRadius:3,tension:0.3,spanGaps:false,borderWidth:2};
   });
   ch2hora.update();
+}
+
+function updateP3Highlight(){
+  var DIAS_SEMANA={"2026-06-11":"Jue","2026-06-12":"Vie","2026-06-13":"Sab","2026-06-14":"Dom","2026-06-15":"Lun","2026-06-16":"Mar","2026-06-17":"Mie","2026-06-18":"Jue","2026-06-19":"Vie","2026-06-20":"Sab","2026-06-21":"Dom"};
+
+  // Only depends on SEDE filter
+  var r=ALL_ROWS.slice();
+  if(selSede["p3"]!=="ALL") r=r.filter(function(x){return x.SEDE===selSede["p3"];});
+
+  // Best day by VENTA_SIN_IVA
+  var byF={};
+  r.forEach(function(x){
+    if(!byF[x.FECHA]) byF[x.FECHA]={v:0,u:0};
+    byF[x.FECHA].v+=x.VENTA_SIN_IVA;
+    byF[x.FECHA].u+=x.UNIDADES;
+  });
+  var entries=Object.entries(byF);
+  if(!entries.length) return;
+  var best=entries.sort(function(a,b){return b[1].v-a[1].v;})[0];
+  var bestFecha=best[0];
+  var bestV=best[1].v;
+  var bestU=best[1].u;
+
+  // Format fecha
+  var parts=bestFecha.split("-");
+  var dayStr=(DIAS_SEMANA[bestFecha]||"")+" "+parseInt(parts[2])+" de Jun 2026";
+  document.getElementById("p3h-fecha").textContent=dayStr;
+  document.getElementById("p3h-sede").textContent=selSede["p3"]==="ALL"?"Todas las sedes":(SN[selSede["p3"]]||selSede["p3"]);
+  document.getElementById("p3h-venta").textContent=fmtM(bestV);
+  document.getElementById("p3h-uds").textContent=bestU.toLocaleString("es-CO")+" unidades";
+
+  // Partidos that day WITH hours — star on highest-venta partido
+  // First compute venta per partido franja
+  var rDay=r.filter(function(x){return x.FECHA===bestFecha;});
+  var ventaPorPartido={};
+  var seenForVenta={};
+  PAR_DEF.forEach(function(p){
+    if(p[0]!==bestFecha) return;
+    if(seenForVenta[p[1]]) return;
+    seenForVenta[p[1]]=true;
+    var hs=p[2], he=p[3];
+    var totalV=0;
+    rDay.forEach(function(x){
+      if(x.HORA>=hs && x.HORA<he) totalV+=x.VENTA_SIN_IVA;
+    });
+    ventaPorPartido[p[1]]=totalV;
+  });
+  var maxPartidoVenta=0;
+  Object.values(ventaPorPartido).forEach(function(v){if(v>maxPartidoVenta)maxPartidoVenta=v;});
+  var bestPartidos={};
+  Object.entries(ventaPorPartido).forEach(function(e){if(e[1]===maxPartidoVenta&&maxPartidoVenta>0)bestPartidos[e[0]]=true;});
+
+  var pEl=document.getElementById("p3h-partidos");
+  pEl.innerHTML="";
+  var seen={};
+  PAR_DEF.forEach(function(p){
+    if(p[0]!==bestFecha) return;
+    if(seen[p[1]]) return;
+    seen[p[1]]=true;
+    var col=PARTIDO_COLORS[p[4]];
+    var hs=p[2], he=p[3];
+    var horaStr=hs+"h - "+he+"h";
+    var isBest=bestPartidos[p[1]];
+    var div=document.createElement("div");
+    div.style.cssText="display:flex;align-items:center;gap:7px"+(isBest?";background:rgba(253,200,80,0.1);border-radius:6px;padding:3px 6px;margin:-3px -6px":"");
+    div.innerHTML=
+      "<span style='width:8px;height:8px;border-radius:50%;background:"+col+";flex-shrink:0;display:inline-block'></span>"+
+      "<span style='font-size:11px;color:"+(isBest?"#fff":"#ccc")+";font-family:Inter,sans-serif;flex:1;font-weight:"+(isBest?"600":"400")+"'>"+p[1]+"</span>"+
+      (isBest?"<span style='font-size:12px' title='Mayor venta en este partido'>&#11088;</span>":"")+
+      "<span style='font-size:10px;color:"+col+";font-family:JetBrains Mono,monospace;white-space:nowrap;font-weight:600'>"+horaStr+"</span>";
+    pEl.appendChild(div);
+  });
+  if(!pEl.children.length){
+    pEl.innerHTML="<span style='font-size:11px;color:#555;font-family:Inter,sans-serif'>Sin partidos registrados</span>";
+  }
+
+  // Top 3 sedes ese dia
+  var sEl=document.getElementById("p3h-sedes");
+  sEl.innerHTML="";
+  var byS={};
+  rDay.forEach(function(x){
+    if(!byS[x.SEDE]) byS[x.SEDE]={v:0,u:0};
+    byS[x.SEDE].v+=x.VENTA_SIN_IVA;
+    byS[x.SEDE].u+=x.UNIDADES;
+  });
+  var topS=Object.entries(byS).sort(function(a,b){return b[1].v-a[1].v;}).slice(0,3);
+  var medals=["🥇","🥈","🥉"];
+  var medalColors=["#f0a500","#b0b0b0","#cd7f32"];
+  topS.forEach(function(e,i){
+    var sedeName=SN[e[0]]||e[0];
+    var pct=bestV>0?(e[1].v/bestV*100).toFixed(1):0;
+    var barW=bestV>0?(e[1].v/topS[0][1].v*100).toFixed(1):0;
+    var div=document.createElement("div");
+    div.innerHTML=
+      "<div style='display:flex;align-items:center;gap:6px;margin-bottom:2px'>"+
+        "<span style='font-size:13px'>"+medals[i]+"</span>"+
+        "<span style='font-size:11px;font-weight:600;color:#fff;font-family:Inter,sans-serif;flex:1'>"+sedeName+"</span>"+
+        "<span style='font-size:10px;color:"+medalColors[i]+";font-family:JetBrains Mono,monospace;font-weight:700'>"+fmtM(e[1].v)+"</span>"+
+      "</div>"+
+      "<div style='display:flex;align-items:center;gap:6px'>"+
+        "<div style='flex:1;height:5px;background:#2a2a2a;border-radius:3px;overflow:hidden'>"+
+          "<div style='height:100%;width:"+barW+"%;background:"+medalColors[i]+";border-radius:3px'></div>"+
+        "</div>"+
+        "<span style='font-size:9px;color:#666;font-family:JetBrains Mono,monospace;min-width:32px;text-align:right'>"+pct+"%</span>"+
+      "</div>";
+    sEl.appendChild(div);
+  });
 }
 
 function upDia(){
@@ -888,7 +1031,7 @@ document.querySelectorAll(".fn").forEach(function(btn){
     btn.className="fn on";
     selSede[p]=btn.getAttribute("data-s");
     if(p==="p2") upMundial();
-    else upDia();
+    else{upDia();if(p==="p3") updateP3Highlight();}
   });
 });
 
