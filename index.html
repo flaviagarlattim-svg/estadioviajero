@@ -73,6 +73,42 @@ header{background:#fff;border-bottom:3px solid var(--or);padding:13px 30px;displ
 .rni{font-family:"JetBrains Mono",monospace;font-size:9px;color:var(--mu);min-width:15px}
 .pleg{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--mu);margin-left:auto}
 .pdot{width:14px;height:10px;background:rgba(253,200,80,.7);border:1px solid #f59e0b;border-radius:2px;display:inline-block}
+.p3-layout{display:flex;min-height:0}
+.p3-sidebar{width:200px;flex-shrink:0;background:#fff;border-right:2px solid var(--bd);padding:14px 0;display:flex;flex-direction:column;gap:0}
+.p3-sidebar-section{padding:10px 14px 6px}
+.p3-sidebar-label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--or);font-weight:700;font-family:"JetBrains Mono",monospace;margin-bottom:8px;display:block}
+.p3-sidebar .fn{display:block;width:100%;text-align:left;margin-bottom:4px;padding:5px 10px;border-radius:6px}
+.p3-sidebar .fd-all{display:block;width:100%;text-align:left;margin-bottom:6px;padding:5px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;background:#fff;border:1.5px solid var(--or3);color:var(--or);font-family:Inter,sans-serif}
+.p3-sidebar .fd-all:hover,.p3-sidebar .fd-all.on{background:var(--or);border-color:var(--or);color:#fff}
+.p3-sidebar .fd-btn{display:flex;align-items:center;gap:8px;width:100%;padding:5px 10px;border-radius:6px;border:1.5px solid var(--or3);background:#fff;cursor:pointer;margin-bottom:4px;font-family:Inter,sans-serif}
+.p3-sidebar .fd-btn:hover{background:var(--or2)}
+.p3-sidebar .fd-btn.on{background:var(--or);border-color:var(--or);color:#fff}
+.p3-sidebar .fd-btn .dw{font-size:9px;font-weight:700;opacity:.7;min-width:24px}
+.p3-sidebar .fd-btn .dn{font-size:12px;font-weight:700;min-width:18px}
+.p3-sidebar .fd-btn .dm{font-size:9px;opacity:.7}
+.p3-sidebar .fd-btn.on .dw,.p3-sidebar .fd-btn.on .dm{opacity:.85}
+.p3-sidebar-divider{height:1px;background:var(--bd);margin:8px 14px}
+.p3-content{flex:1;min-width:0;overflow-y:auto}
+.dash-layout{display:flex;min-height:calc(100vh - 120px)}
+.dash-sidebar{width:190px;flex-shrink:0;background:#fff;border-right:2px solid var(--bd);display:flex;flex-direction:column;overflow-y:auto;position:sticky;top:0;max-height:calc(100vh - 120px)}
+.dash-content{flex:1;min-width:0}
+.sb-section{padding:12px 12px 8px}
+.sb-label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--or);font-weight:700;font-family:"JetBrains Mono",monospace;margin-bottom:8px;display:block}
+.sb-divider{height:1px;background:var(--bd);margin:2px 0}
+.sb-btn{display:block;width:100%;text-align:left;padding:5px 10px;border-radius:5px;border:none;background:transparent;color:var(--ink);font-family:Inter,sans-serif;font-size:11px;cursor:pointer;margin-bottom:2px;transition:background .12s}
+.sb-btn:hover{background:var(--or2);color:var(--or)}
+.sb-btn.on{background:var(--or);color:#fff;font-weight:600}
+.sb-date-wrap{position:relative}
+.sb-date-toggle{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-radius:5px;border:1.5px solid var(--or3);background:#fff;color:var(--or);font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:600;cursor:pointer;width:100%;margin-bottom:4px}
+.sb-date-toggle:hover{background:var(--or2)}
+.sb-date-toggle.has-sel{background:var(--or);border-color:var(--or);color:#fff}
+.sb-date-drop{display:none;background:#fff;border:1.5px solid var(--or3);border-radius:6px;overflow:hidden;margin-top:2px}
+.sb-date-drop.open{display:block}
+.sb-date-drop label{display:flex;align-items:center;gap:7px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:Inter,sans-serif}
+.sb-date-drop label:hover{background:var(--or2)}
+.sb-date-drop input[type=checkbox]{accent-color:var(--or);width:13px;height:13px;cursor:pointer}
+.sb-date-clear{display:block;width:100%;padding:5px 10px;font-size:10px;font-family:"JetBrains Mono",monospace;color:var(--mu);background:none;border:none;cursor:pointer;text-align:left;border-top:1px solid var(--bd)}
+.sb-date-clear:hover{color:var(--or)}
 canvas{display:block;width:100%!important}
 .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 30px 16px}
 .compare-title{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;padding:6px 10px;border-radius:6px;margin-left:auto}
@@ -103,21 +139,24 @@ footer{text-align:center;padding:14px;font-size:10px;color:var(--mu);font-family
 
 <!-- TAB 1: MUNDIAL -->
 <div class="tp on" id="p2">
-  <div class="fb">
-    <span class="fl">Sede</span>
-    <button class="fn on" data-p="p2" data-s="ALL">Todas</button>
-    <div class="fd"></div>
-    <button class="fn" data-p="p2" data-s="Viajero Bogota">Bogot&aacute;</button>
-    <button class="fn" data-p="p2" data-s="Viajero Cali">Cali</button>
-    <button class="fn" data-p="p2" data-s="Viajero Cartagena Centro">Cartagena</button>
-    <button class="fn" data-p="p2" data-s="Viajero Getsemani">Getseman&iacute;</button>
-    <button class="fn" data-p="p2" data-s="Viajero Guatape">Guatap&eacute;</button>
-    <button class="fn" data-p="p2" data-s="Viajero Medellin">Medell&iacute;n</button>
-    <button class="fn" data-p="p2" data-s="Viajero Salento">Salento</button>
-    <button class="fn" data-p="p2" data-s="Viajero San Andres">San Andr&eacute;s</button>
-    <button class="fn" data-p="p2" data-s="Viajero Santa Marta">Santa Marta</button>
-    <button class="fn" data-p="p2" data-s="Viajero Tayrona">Tayrona</button>
-  </div>
+  <div class="dash-layout">
+    <div class="dash-sidebar">
+      <div class="sb-section">
+        <span class="sb-label">Sede</span>
+        <button class="sb-btn on" data-p="p2" data-s="ALL">Todas</button>
+        <button class="sb-btn" data-p="p2" data-s="Viajero Bogota">Bogotá</button>
+        <button class="sb-btn" data-p="p2" data-s="Viajero Cali">Cali</button>
+        <button class="sb-btn" data-p="p2" data-s="Viajero Cartagena Centro">Cartagena</button>
+        <button class="sb-btn" data-p="p2" data-s="Viajero Getsemani">Getsemaní</button>
+        <button class="sb-btn" data-p="p2" data-s="Viajero Guatape">Guatapé</button>
+        <button class="sb-btn" data-p="p2" data-s="Viajero Medellin">Medellín</button>
+        <button class="sb-btn" data-p="p2" data-s="Viajero Salento">Salento</button>
+        <button class="sb-btn" data-p="p2" data-s="Viajero San Andres">San Andrés</button>
+        <button class="sb-btn" data-p="p2" data-s="Viajero Santa Marta">Santa Marta</button>
+        <button class="sb-btn" data-p="p2" data-s="Viajero Tayrona">Tayrona</button>
+      </div>
+    </div>
+    <div class="dash-content">
   <div class="kr">
     <div class="k"><div class="kl">Total unidades</div><div class="kv" id="g2u">-</div><div class="ks" id="g2us">cat. Mundial</div></div>
     <div class="k"><div class="kl">Venta sin IVA</div><div class="kv" id="g2v">-</div><div class="ks" id="g2vs">COP</div></div>
@@ -135,41 +174,53 @@ footer{text-align:center;padding:14px;font-size:10px;color:var(--mu);font-family
 </div>
 
 <!-- TAB 2: VENTA POR DIA -->
+    </div></div>
 <div class="tp" id="p3">
-  <div class="fb">
-    <span class="fl">Sede</span>
-    <button class="fn on" data-p="p3" data-s="ALL">Todas</button>
-    <div class="fd"></div>
-    <button class="fn" data-p="p3" data-s="Viajero Bogota">Bogot&aacute;</button>
-    <button class="fn" data-p="p3" data-s="Viajero Cali">Cali</button>
-    <button class="fn" data-p="p3" data-s="Viajero Cartagena Centro">Cartagena</button>
-    <button class="fn" data-p="p3" data-s="Viajero Getsemani">Getseman&iacute;</button>
-    <button class="fn" data-p="p3" data-s="Viajero Guatape">Guatap&eacute;</button>
-    <button class="fn" data-p="p3" data-s="Viajero Medellin">Medell&iacute;n</button>
-    <button class="fn" data-p="p3" data-s="Viajero Salento">Salento</button>
-    <button class="fn" data-p="p3" data-s="Viajero San Andres">San Andr&eacute;s</button>
-    <button class="fn" data-p="p3" data-s="Viajero Santa Marta">Santa Marta</button>
-    <button class="fn" data-p="p3" data-s="Viajero Tayrona">Tayrona</button>
-  </div>
-  <div class="fecha-strip">
-    <span class="fl2">Fecha</span>
-    <button class="fd-all on" data-f="ALL">Todas</button>
-    <button class="fd-btn" data-f="2026-06-11"><span class="dw">JUE</span><span class="dn">11</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-12"><span class="dw">VIE</span><span class="dn">12</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-13"><span class="dw">SAB</span><span class="dn">13</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-14"><span class="dw">DOM</span><span class="dn">14</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-15"><span class="dw">LUN</span><span class="dn">15</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-16"><span class="dw">MAR</span><span class="dn">16</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-17"><span class="dw">MIE</span><span class="dn">17</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-18"><span class="dw">JUE</span><span class="dn">18</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-19"><span class="dw">VIE</span><span class="dn">19</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-20"><span class="dw">SAB</span><span class="dn">20</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-21"><span class="dw">DOM</span><span class="dn">21</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-22"><span class="dw">LUN</span><span class="dn">22</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-f="2026-06-23"><span class="dw">MAR</span><span class="dn">23</span><span class="dm">Jun</span></button>
-  </div>
-
-  <!-- HIGHLIGHT: mejor dia y partido -->
+  <div class="dash-layout">
+    <div class="dash-sidebar">
+      <div class="sb-section">
+        <span class="sb-label">Sede</span>
+        <button class="sb-btn on" data-p="p3" data-s="ALL">Todas</button>
+        <button class="sb-btn" data-p="p3" data-s="Viajero Bogota">Bogotá</button>
+        <button class="sb-btn" data-p="p3" data-s="Viajero Cali">Cali</button>
+        <button class="sb-btn" data-p="p3" data-s="Viajero Cartagena Centro">Cartagena</button>
+        <button class="sb-btn" data-p="p3" data-s="Viajero Getsemani">Getsemaní</button>
+        <button class="sb-btn" data-p="p3" data-s="Viajero Guatape">Guatapé</button>
+        <button class="sb-btn" data-p="p3" data-s="Viajero Medellin">Medellín</button>
+        <button class="sb-btn" data-p="p3" data-s="Viajero Salento">Salento</button>
+        <button class="sb-btn" data-p="p3" data-s="Viajero San Andres">San Andrés</button>
+        <button class="sb-btn" data-p="p3" data-s="Viajero Santa Marta">Santa Marta</button>
+        <button class="sb-btn" data-p="p3" data-s="Viajero Tayrona">Tayrona</button>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-section">
+        <span class="sb-label">Fecha</span>
+        <div class="sb-date-wrap">
+        <button class="sb-date-toggle" id="sb-toggle-p3" onclick="toggleDateDrop('p3')">
+          <span id="sb-date-label-p3">Todas las fechas</span>
+          <span>&#9660;</span>
+        </button>
+        <div class="sb-date-drop" id="sb-drop-p3">
+          <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-11"><span>JUE 11 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-12"><span>VIE 12 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-13"><span>SAB 13 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-14"><span>DOM 14 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-15"><span>LUN 15 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-16"><span>MAR 16 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-17"><span>MIE 17 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-18"><span>JUE 18 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-19"><span>VIE 19 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-20"><span>SAB 20 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-21"><span>DOM 21 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-22"><span>LUN 22 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p3" data-f="2026-06-23"><span>MAR 23 Jun</span></label>
+          <button class="sb-date-clear" onclick="clearFechas('p3')">&#215; Limpiar selección</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="dash-content">
+<!-- HIGHLIGHT: mejor dia y partido -->
   <div style="padding:14px 30px 0">
     <div id="p3highlight" style="background:linear-gradient(135deg,#0f0e0c 0%,#1e1a2e 60%,#0f0e0c 100%);border-radius:10px;border:2px solid #e84b1a;padding:18px 24px;display:grid;grid-template-columns:auto 1fr 1fr 1.4fr 1.2fr;gap:0;align-items:start">
 
@@ -203,18 +254,38 @@ footer{text-align:center;padding:14px;font-size:10px;color:var(--mu);font-family
     </div>
   </div>
 
-  <!-- TNC: SEGUNDO GRÁFICO - Ticket Noche Cama -->
-  <div style="padding:14px 30px 6px">
-    <div class="card cw">
-      <div class="ch">
-        <h2>Ticket Noche Cama (TNC)</h2>
-        <span class="cs">Venta sin IVA del d&iacute;a &divide; Ocupaci&oacute;n &middot; COP / noche-cama</span>
-        <span class="ft" id="t3tnc-sede"></span>
-        <span class="ft on" id="t3tnc-all" style="display:inline-block">Todas las sedes</span>
+
+      <!-- TNC + TABLA FRANJAS -->
+      <div style="padding:14px 20px 6px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start">
+        <!-- TNC -->
+        <div class="card">
+          <div class="ch">
+            <h2>Ticket Noche Cama (TNC)</h2>
+            <span class="cs">Venta sin IVA &divide; Ocupaci&oacute;n &middot; COP / noche-cama</span>
+            <span class="ft" id="t3tnc-sede"></span>
+            <span class="ft on" id="t3tnc-all" style="display:inline-block">Todas las sedes</span>
+          </div>
+          <div class="cb" style="height:260px"><canvas id="c3tnc"></canvas></div>
+        </div>
+        <!-- TABLA FRANJAS HORARIAS -->
+        <div class="card" style="min-width:220px">
+          <div class="ch"><h2>Ingresos por Franja</h2><span class="cs">Sin IVA &middot; todos los filtros</span></div>
+          <div style="overflow-y:auto;max-height:294px">
+            <table style="width:100%;border-collapse:collapse;font-size:11px">
+              <thead>
+                <tr style="background:#f7f7f5;position:sticky;top:0">
+                  <th style="padding:6px 8px;text-align:left;font-size:9px;color:#888;font-weight:600;border-bottom:2px solid var(--bd)">#</th>
+                  <th style="padding:6px 8px;text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#888;font-weight:600;border-bottom:2px solid var(--bd)">Hora</th>
+                  <th style="padding:6px 8px;text-align:right;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#888;font-weight:600;border-bottom:2px solid var(--bd)">Venta</th>
+                  <th style="padding:6px 8px;text-align:right;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#888;font-weight:600;border-bottom:2px solid var(--bd)">%</th>
+                </tr>
+              </thead>
+              <tbody id="t3horaTable"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div class="cb" style="height:260px"><canvas id="c3tnc"></canvas></div>
-    </div>
-  </div>
+
 
   <!-- RANKING PARTIDOS - depende de filtros sede y fecha -->
   <div style="padding:16px 30px 0">
@@ -225,7 +296,7 @@ footer{text-align:center;padding:14px;font-size:10px;color:var(--mu);font-family
         <span class="ft on" id="t3rank-fecha" style="display:inline-block">Todas las fechas</span>
         <span class="ft" id="t3rank-sede"></span>
       </div>
-      <div class="cb" style="height:300px"><canvas id="c3ranking"></canvas></div>
+      <div class="cb" style="height:900px"><canvas id="c3ranking"></canvas></div>
     </div>
   </div>
 
@@ -235,54 +306,54 @@ footer{text-align:center;padding:14px;font-size:10px;color:var(--mu);font-family
   </div>
 </div>
 <!-- TAB 4: MUNDIAL VS GENERAL -->
-<div class="tp" id="p4">
-  <div class="fb">
-    <span class="fl">Sede</span>
-    <button class="fn on" data-p="p4" data-s="ALL">Todas</button>
-    <div class="fd"></div>
-    <button class="fn" data-p="p4" data-s="Viajero Bogota">Bogot&aacute;</button>
-    <button class="fn" data-p="p4" data-s="Viajero Cali">Cali</button>
-    <button class="fn" data-p="p4" data-s="Viajero Cartagena Centro">Cartagena</button>
-    <button class="fn" data-p="p4" data-s="Viajero Getsemani">Getseman&iacute;</button>
-    <button class="fn" data-p="p4" data-s="Viajero Guatape">Guatap&eacute;</button>
-    <button class="fn" data-p="p4" data-s="Viajero Medellin">Medell&iacute;n</button>
-    <button class="fn" data-p="p4" data-s="Viajero Salento">Salento</button>
-    <button class="fn" data-p="p4" data-s="Viajero San Andres">San Andr&eacute;s</button>
-    <button class="fn" data-p="p4" data-s="Viajero Santa Marta">Santa Marta</button>
-    <button class="fn" data-p="p4" data-s="Viajero Tayrona">Tayrona</button>
-  </div>
-  <div class="fecha-strip" id="p4-fecha-strip">
-    <span class="fl2">Fecha</span>
-    <button class="fd-all on" data-pane="p4" data-f="ALL">Todas</button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-11"><span class="dw">JUE</span><span class="dn">11</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-12"><span class="dw">VIE</span><span class="dn">12</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-13"><span class="dw">SAB</span><span class="dn">13</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-14"><span class="dw">DOM</span><span class="dn">14</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-15"><span class="dw">LUN</span><span class="dn">15</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-16"><span class="dw">MAR</span><span class="dn">16</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-17"><span class="dw">MIE</span><span class="dn">17</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-18"><span class="dw">JUE</span><span class="dn">18</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-19"><span class="dw">VIE</span><span class="dn">19</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-20"><span class="dw">SAB</span><span class="dn">20</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-21"><span class="dw">DOM</span><span class="dn">21</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-22"><span class="dw">LUN</span><span class="dn">22</span><span class="dm">Jun</span></button>
-    <button class="fd-btn" data-pane="p4" data-f="2026-06-23"><span class="dw">MAR</span><span class="dn">23</span><span class="dm">Jun</span></button>
-  </div>
+    </div></div></div>
 
-  <!-- TOP 3 MUNDIAL SEDES -->
-  <div style="padding:14px 30px 0">
-    <div style="background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px 22px;display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:0;align-items:center">
-      <div style="padding-right:20px;border-right:1px solid var(--bd)">
-        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#e84b1a;font-weight:700;font-family:'JetBrains Mono',monospace;margin-bottom:4px">Ranking Mundial</div>
-        <div style="font-family:'DM Serif Display',serif;font-size:1rem;color:var(--ink)">Top 3 sedes</div>
-        <div style="font-size:10px;color:var(--mu);margin-top:2px">por ingreso cat. Mundial</div>
-        
+<div class="tp" id="p4">
+  <div class="dash-layout">
+    <div class="dash-sidebar">
+      <div class="sb-section">
+        <span class="sb-label">Sede</span>
+        <button class="sb-btn on" data-p="p4" data-s="ALL">Todas</button>
+        <button class="sb-btn" data-p="p4" data-s="Viajero Bogota">Bogotá</button>
+        <button class="sb-btn" data-p="p4" data-s="Viajero Cali">Cali</button>
+        <button class="sb-btn" data-p="p4" data-s="Viajero Cartagena Centro">Cartagena</button>
+        <button class="sb-btn" data-p="p4" data-s="Viajero Getsemani">Getsemaní</button>
+        <button class="sb-btn" data-p="p4" data-s="Viajero Guatape">Guatapé</button>
+        <button class="sb-btn" data-p="p4" data-s="Viajero Medellin">Medellín</button>
+        <button class="sb-btn" data-p="p4" data-s="Viajero Salento">Salento</button>
+        <button class="sb-btn" data-p="p4" data-s="Viajero San Andres">San Andrés</button>
+        <button class="sb-btn" data-p="p4" data-s="Viajero Santa Marta">Santa Marta</button>
+        <button class="sb-btn" data-p="p4" data-s="Viajero Tayrona">Tayrona</button>
       </div>
-      <div id="p4rank-1" style="padding:0 18px;border-right:1px solid var(--bd);text-align:center">—</div>
-      <div id="p4rank-2" style="padding:0 18px;border-right:1px solid var(--bd);text-align:center">—</div>
-      <div id="p4rank-3" style="padding:0 18px;text-align:center">—</div>
+      <div class="sb-divider"></div>
+      <div class="sb-section">
+        <span class="sb-label">Fecha</span>
+        <div class="sb-date-wrap">
+        <button class="sb-date-toggle" id="sb-toggle-p4" onclick="toggleDateDrop('p4')">
+          <span id="sb-date-label-p4">Todas las fechas</span>
+          <span>&#9660;</span>
+        </button>
+        <div class="sb-date-drop" id="sb-drop-p4">
+          <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-11"><span>JUE 11 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-12"><span>VIE 12 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-13"><span>SAB 13 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-14"><span>DOM 14 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-15"><span>LUN 15 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-16"><span>MAR 16 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-17"><span>MIE 17 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-18"><span>JUE 18 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-19"><span>VIE 19 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-20"><span>SAB 20 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-21"><span>DOM 21 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-22"><span>LUN 22 Jun</span></label>
+        <label><input type="checkbox" class="sb-fecha-cb" data-pane="p4" data-f="2026-06-23"><span>MAR 23 Jun</span></label>
+          <button class="sb-date-clear" onclick="clearFechas('p4')">&#215; Limpiar selección</button>
+        </div>
+      </div>
+      </div>
     </div>
-  </div>
+    <div class="dash-content">
+
 
   <!-- SUMMARY: MUNDIAL vs GENERAL participation -->
   <div class="gr" style="padding-top:16px;grid-template-columns:1fr 2fr">
@@ -393,6 +464,7 @@ footer{text-align:center;padding:14px;font-size:10px;color:var(--mu);font-family
 </div>
 
 <!-- TAB 5: CONCURSO -->
+    </div></div>
 <div class="tp" id="p5">
 
   <!-- HERO BANNER -->
@@ -521,21 +593,24 @@ footer{text-align:center;padding:14px;font-size:10px;color:var(--mu);font-family
     <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:#fff;line-height:1.1">Venta por Partido y Sede</div>
     <div style="font-size:11px;color:#888;margin-top:3px">Ingresos sin IVA durante la franja horaria de cada partido</div>
   </div>
-  <div class="fb">
-    <span class="fl">Sede</span>
-    <button class="fn on" data-p="p6" data-s="ALL">Todas</button>
-    <div class="fd"></div>
-    <button class="fn" data-p="p6" data-s="Viajero Bogota">Bogot&aacute;</button>
-    <button class="fn" data-p="p6" data-s="Viajero Cali">Cali</button>
-    <button class="fn" data-p="p6" data-s="Viajero Cartagena Centro">Cartagena</button>
-    <button class="fn" data-p="p6" data-s="Viajero Getsemani">Getseman&iacute;</button>
-    <button class="fn" data-p="p6" data-s="Viajero Guatape">Guatap&eacute;</button>
-    <button class="fn" data-p="p6" data-s="Viajero Medellin">Medell&iacute;n</button>
-    <button class="fn" data-p="p6" data-s="Viajero Salento">Salento</button>
-    <button class="fn" data-p="p6" data-s="Viajero San Andres">San Andr&eacute;s</button>
-    <button class="fn" data-p="p6" data-s="Viajero Santa Marta">Santa Marta</button>
-    <button class="fn" data-p="p6" data-s="Viajero Tayrona">Tayrona</button>
-  </div>
+    <div class="dash-layout">
+    <div class="dash-sidebar">
+      <div class="sb-section">
+        <span class="sb-label">Sede</span>
+        <button class="sb-btn on" data-p="p6" data-s="ALL">Todas</button>
+        <button class="sb-btn" data-p="p6" data-s="Viajero Bogota">Bogotá</button>
+        <button class="sb-btn" data-p="p6" data-s="Viajero Cali">Cali</button>
+        <button class="sb-btn" data-p="p6" data-s="Viajero Cartagena Centro">Cartagena</button>
+        <button class="sb-btn" data-p="p6" data-s="Viajero Getsemani">Getsemaní</button>
+        <button class="sb-btn" data-p="p6" data-s="Viajero Guatape">Guatapé</button>
+        <button class="sb-btn" data-p="p6" data-s="Viajero Medellin">Medellín</button>
+        <button class="sb-btn" data-p="p6" data-s="Viajero Salento">Salento</button>
+        <button class="sb-btn" data-p="p6" data-s="Viajero San Andres">San Andrés</button>
+        <button class="sb-btn" data-p="p6" data-s="Viajero Santa Marta">Santa Marta</button>
+        <button class="sb-btn" data-p="p6" data-s="Viajero Tayrona">Tayrona</button>
+      </div>
+    </div>
+    <div class="dash-content">
   <div class="gr" style="padding-top:16px">
     <div class="card cw">
       <div class="ch">
@@ -548,22 +623,26 @@ footer{text-align:center;padding:14px;font-size:10px;color:var(--mu);font-family
 </div>
 
 <!-- TAB 7: COMPARATIVO -->
+    </div></div>
 <div class="tp" id="p7">
-  <div class="fb">
-    <span class="fl">Sede</span>
-    <button class="fn on" data-p="p7" data-s="ALL">Todas</button>
-    <div class="fd"></div>
-    <button class="fn" data-p="p7" data-s="Viajero Bogota">Bogot&aacute;</button>
-    <button class="fn" data-p="p7" data-s="Viajero Cali">Cali</button>
-    <button class="fn" data-p="p7" data-s="Viajero Cartagena Centro">Cartagena</button>
-    <button class="fn" data-p="p7" data-s="Viajero Getsemani">Getseman&iacute;</button>
-    <button class="fn" data-p="p7" data-s="Viajero Guatape">Guatap&eacute;</button>
-    <button class="fn" data-p="p7" data-s="Viajero Medellin">Medell&iacute;n</button>
-    <button class="fn" data-p="p7" data-s="Viajero Salento">Salento</button>
-    <button class="fn" data-p="p7" data-s="Viajero San Andres">San Andr&eacute;s</button>
-    <button class="fn" data-p="p7" data-s="Viajero Santa Marta">Santa Marta</button>
-    <button class="fn" data-p="p7" data-s="Viajero Tayrona">Tayrona</button>
-  </div>
+  <div class="dash-layout">
+    <div class="dash-sidebar">
+      <div class="sb-section">
+        <span class="sb-label">Sede</span>
+        <button class="sb-btn on" data-p="p7" data-s="ALL">Todas</button>
+        <button class="sb-btn" data-p="p7" data-s="Viajero Bogota">Bogotá</button>
+        <button class="sb-btn" data-p="p7" data-s="Viajero Cali">Cali</button>
+        <button class="sb-btn" data-p="p7" data-s="Viajero Cartagena Centro">Cartagena</button>
+        <button class="sb-btn" data-p="p7" data-s="Viajero Getsemani">Getsemaní</button>
+        <button class="sb-btn" data-p="p7" data-s="Viajero Guatape">Guatapé</button>
+        <button class="sb-btn" data-p="p7" data-s="Viajero Medellin">Medellín</button>
+        <button class="sb-btn" data-p="p7" data-s="Viajero Salento">Salento</button>
+        <button class="sb-btn" data-p="p7" data-s="Viajero San Andres">San Andrés</button>
+        <button class="sb-btn" data-p="p7" data-s="Viajero Santa Marta">Santa Marta</button>
+        <button class="sb-btn" data-p="p7" data-s="Viajero Tayrona">Tayrona</button>
+      </div>
+    </div>
+    <div class="dash-content">
 
   <!-- Leyenda de meses -->
   <div style="background:#fff;border-bottom:1px solid var(--bd);padding:9px 30px;display:flex;align-items:center;gap:20px">
@@ -599,6 +678,7 @@ footer{text-align:center;padding:14px;font-size:10px;color:var(--mu);font-family
   </div>
 </div>
 
+    </div></div>
 
 <footer>Pestaña "ventas" &middot; Jun 11&ndash;21, 2026 &middot; 16.196 registros (desde 10:00h) &middot; Viajero Colombia &middot; Copa Mundial 2026</footer>
 
@@ -679,6 +759,7 @@ var PAR_DEF=[
 
 
 var selSede={"p2":"ALL","p3":"ALL","p4":"ALL","p6":"ALL"};
+var selFechas={"p3":[],"p4":[]};  // multi-date: [] means "all dates"
 var selSede4="ALL";
 var dFecha="ALL"; var dFecha4="ALL";
 var selPartidoHoras=null; var selPartidoHorasM=null; var selPartidoHorasG=null;
@@ -816,7 +897,7 @@ function mkBarHora(r,fecha){
 function getGroupRows(){
   var r=ALL_ROWS.slice();
   if(selSede["p3"]!=="ALL") r=r.filter(function(x){return x.SEDE===selSede["p3"];});
-  if(dFecha!=="ALL") r=r.filter(function(x){return x.FECHA===dFecha;});
+  if(selFechas["p3"].length>0) r=r.filter(function(x){return selFechas["p3"].indexOf(x.FECHA)>=0;});
   if(selPartidoHoras&&selPartidoHoras.length) r=r.filter(function(x){return selPartidoHoras.indexOf(x.HORA)>=0;});
   return r;
 }
@@ -836,6 +917,34 @@ function mkGroup(r){
           generateLabels:function(chart){var ds=chart.data.datasets[0];var tot=ds.data.reduce(function(a,b){return a+b;},0);return chart.data.labels.map(function(l,i){var pct=tot>0?(ds.data[i]/tot*100).toFixed(1):"0.0";return{text:l+"   "+pct+"%",fillStyle:bgC[i],strokeStyle:"#fff",lineWidth:1,hidden:false,index:i};});}
         }},
         tooltip:{callbacks:{label:function(c){var tot=c.dataset.data.reduce(function(a,b){return a+b;},0);return " "+c.label+": "+fmtF(c.raw)+" ("+(tot>0?(c.raw/tot*100).toFixed(1):0)+"%)";}}}}}
+  });
+}
+
+
+function mkHoraTable(){
+  var tbody=document.getElementById("t3horaTable"); if(!tbody) return;
+  var r=ALL_ROWS.slice();
+  if(selSede["p3"]!=="ALL") r=r.filter(function(x){return x.SEDE===selSede["p3"];});
+  if(selFechas["p3"].length>0) r=r.filter(function(x){return selFechas["p3"].indexOf(x.FECHA)>=0;});
+  else if(dFecha!=="ALL") r=r.filter(function(x){return x.FECHA===dFecha;});
+  var byH={};
+  r.forEach(function(x){byH[x.HORA]=(byH[x.HORA]||0)+x.VENTA_SIN_IVA;});
+  var total=Object.values(byH).reduce(function(a,b){return a+b;},0);
+  var sorted=Object.entries(byH).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+  var medals=["🥇","🥈","🥉","4°","5°"];
+  var colors=["#e84b1a","#c9821a","#4a90d9","#2a8a5a","#9b4fc9"];
+  tbody.innerHTML="";
+  sorted.forEach(function(e,i){
+    var h=parseInt(e[0]), v=e[1], pct=total>0?(v/total*100):0;
+    var col=colors[i];
+    var tr=document.createElement("tr");
+    tr.style.borderBottom="1px solid #f0ece4";
+    tr.innerHTML=
+      "<td style='padding:7px 10px;font-size:13px'>"+medals[i]+"</td>"+
+      "<td style='padding:7px 10px;font-family:JetBrains Mono,monospace;font-weight:700;color:"+col+"'>"+h+"h</td>"+
+      "<td style='padding:7px 10px;text-align:right;font-family:JetBrains Mono,monospace;font-size:11px;font-weight:600;color:"+col+"'>"+fmtM(v)+"</td>"+
+      "<td style='padding:7px 10px;text-align:right;font-family:JetBrains Mono,monospace;font-size:10px;color:#888'>"+pct.toFixed(1)+"%</td>";
+    tbody.appendChild(tr);
   });
 }
 
@@ -903,7 +1012,7 @@ function mkRankingPartidos(){
     if(!vP[p[1]]) vP[p[1]]={v:0,color:PC[p[4]]};
     vP[p[1]].v+=r.filter(function(x){return x.FECHA===p[0]&&x.HORA>=p[2]&&x.HORA<Math.max(p[3],p[2]+1);}).reduce(function(s,x){return s+x.VENTA_SIN_IVA;},0);
   });
-  var sorted=Object.entries(vP).filter(function(e){return e[1].v>0;}).sort(function(a,b){return b[1].v-a[1].v;}).slice(0,15);
+  var sorted=Object.entries(vP).filter(function(e){return e[1].v>0;}).sort(function(a,b){return b[1].v-a[1].v;});
   var ctx=document.getElementById("c3ranking"); if(!ctx) return;
   ch3rank=new Chart(ctx.getContext("2d"),{type:"bar",
     data:{labels:sorted.map(function(e){return e[0];}),datasets:[{label:"Venta sin IVA",data:sorted.map(function(e){return Math.round(e[1].v);}),backgroundColor:sorted.map(function(e){return e[1].color+"cc";}),borderColor:sorted.map(function(e){return e[1].color;}),borderWidth:1,borderRadius:4}]},
@@ -915,6 +1024,34 @@ function mkRankingPartidos(){
   if(ef){ef.textContent=dFecha==="ALL"?"Todas las fechas":((DS[dFecha]||"")+" "+dFecha.split("-")[2]+" Jun");ef.className="ft on";}
   var es=document.getElementById("t3rank-sede");
   if(es){var isF=selSede["p3"]!=="ALL";es.textContent=isF?(SN[selSede["p3"]]||selSede["p3"]):"";es.className="ft"+(isF?" on":"");}
+}
+
+
+function mkHoraTable(){
+  var tbody=document.getElementById("t3horaTable"); if(!tbody) return;
+  var r=ALL_ROWS.slice();
+  if(selSede["p3"]!=="ALL") r=r.filter(function(x){return x.SEDE===selSede["p3"];});
+  if(selFechas["p3"].length>0) r=r.filter(function(x){return selFechas["p3"].indexOf(x.FECHA)>=0;});
+  else if(dFecha!=="ALL") r=r.filter(function(x){return x.FECHA===dFecha;});
+  var byH={};
+  r.forEach(function(x){byH[x.HORA]=(byH[x.HORA]||0)+x.VENTA_SIN_IVA;});
+  var total=Object.values(byH).reduce(function(a,b){return a+b;},0);
+  var sorted=Object.entries(byH).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+  var medals=["🥇","🥈","🥉","4°","5°"];
+  var colors=["#e84b1a","#c9821a","#4a90d9","#2a8a5a","#9b4fc9"];
+  tbody.innerHTML="";
+  sorted.forEach(function(e,i){
+    var h=parseInt(e[0]), v=e[1], pct=total>0?(v/total*100):0;
+    var col=colors[i];
+    var tr=document.createElement("tr");
+    tr.style.borderBottom="1px solid #f0ece4";
+    tr.innerHTML=
+      "<td style='padding:7px 10px;font-size:13px'>"+medals[i]+"</td>"+
+      "<td style='padding:7px 10px;font-family:JetBrains Mono,monospace;font-weight:700;color:"+col+"'>"+h+"h</td>"+
+      "<td style='padding:7px 10px;text-align:right;font-family:JetBrains Mono,monospace;font-size:11px;font-weight:600;color:"+col+"'>"+fmtM(v)+"</td>"+
+      "<td style='padding:7px 10px;text-align:right;font-family:JetBrains Mono,monospace;font-size:10px;color:#888'>"+pct.toFixed(1)+"%</td>";
+    tbody.appendChild(tr);
+  });
 }
 
 function mkTNC(){
@@ -1031,10 +1168,10 @@ function upDia(){
   selPartidoHoras=null; setBadge("partidoBadge",null,null);
   var r=ALL_ROWS.slice();
   if(selSede["p3"]!=="ALL") r=r.filter(function(x){return x.SEDE===selSede["p3"];});
-  if(dFecha!=="ALL") r=r.filter(function(x){return x.FECHA===dFecha;});
+  if(selFechas["p3"].length>0) r=r.filter(function(x){return selFechas["p3"].indexOf(x.FECHA)>=0;});
   var tag=document.getElementById("t3h"); if(tag) tag.textContent=selSede["p3"]==="ALL"?"Todas las sedes":(SN[selSede["p3"]]||selSede["p3"]);
   setTag("t3g","p3");
-  if(p3Inited){mkTNC(); mkBarHora(r,dFecha); mkGroup(getGroupRows()); mkRankingPartidos(); updateP3Highlight();}
+  if(p3Inited){mkTNC(); mkHoraTable(); mkBarHora(r,selFechas["p3"].length===1?selFechas["p3"][0]:"ALL"); mkGroup(getGroupRows()); mkRankingPartidos(); updateP3Highlight();}
 }
 
 function updateTop3Mundial(){
@@ -1161,7 +1298,7 @@ function upP4(){
   setBadge("p4BadgeM",null,null);setBadge("p4BadgeG",null,null);
   var r=ALL_ROWS.slice();
   if(selSede4!=="ALL") r=r.filter(function(x){return x.SEDE===selSede4;});
-  if(dFecha4!=="ALL") r=r.filter(function(x){return x.FECHA===dFecha4;});
+  if(selFechas["p4"].length>0) r=r.filter(function(x){return selFechas["p4"].indexOf(x.FECHA)>=0;});
   var tagText=selSede4==="ALL"?"Todas las sedes":(SN[selSede4]||selSede4);
   var isF=selSede4!=="ALL";var fText=isF?tagText:"";
   ["t4h-m","t4h-g"].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=tagText;});
@@ -1241,36 +1378,17 @@ document.querySelectorAll(".tb").forEach(function(btn){
     btn.className="tb on";
     var t=btn.getAttribute("data-t");
     document.getElementById(t).className="tp on";
-    if(t==="p3"&&!p3Inited){p3Inited=true;setTimeout(function(){mkTNC();mkBarHora(ALL_ROWS,"ALL");mkGroup(getGroupRows());mkRankingPartidos();updateP3Highlight();},50);}
-    if(t==="p4"&&!p4Inited){p4Inited=true;upP4();}
+    if(t==="p3"&&!p3Inited){p3Inited=true;setTimeout(function(){mkTNC();mkHoraTable();mkBarHora(ALL_ROWS,"ALL");mkGroup(getGroupRows());mkRankingPartidos();updateP3Highlight();},50);}
+    if(t==="p4"&&!p4Inited){p4Inited=true;setTimeout(upP4,50);}
     if(t==="p5"&&!p5Inited){p5Inited=true;setTimeout(initConcurso,50);}
     if(t==="p6"&&!p6Inited){p6Inited=true;setTimeout(function(){mkVentaPartidos();},50);}
     if(t==="p7"&&!p7Inited){p7Inited=true;setTimeout(mkCmp7,50);}
   });
 });
 
-document.querySelectorAll(".fn").forEach(function(btn){
-  btn.addEventListener("click",function(){
-    var p=btn.getAttribute("data-p");
-    document.querySelectorAll(".fn[data-p='"+p+"']").forEach(function(b){b.className="fn";});
-    btn.className="fn on";
-    if(p==="p4"){selSede4=btn.getAttribute("data-s");if(p4Inited)upP4();}
-    else if(p==="p6"){selSede["p6"]=btn.getAttribute("data-s");if(p6Inited)mkVentaPartidos();}
-    else{selSede[p]=btn.getAttribute("data-s");if(p==="p2")upMundial();else upDia();}
-  });
-});
+// sede handled by sb-btn listeners below
 
-function activateFechaBtn(pane,val){
-  var p3=pane==="p3";
-  document.querySelectorAll(p3?".fd-btn:not([data-pane])":".fd-btn[data-pane='"+pane+"']").forEach(function(b){b.className="fd-btn";});
-  document.querySelectorAll(p3?".fd-all:not([data-pane])":".fd-all[data-pane='"+pane+"']").forEach(function(b){b.className="fd-all";});
-  if(val==="ALL"){document.querySelectorAll(p3?".fd-all:not([data-pane])":".fd-all[data-pane='"+pane+"']").forEach(function(b){b.className="fd-all on";});}
-  else{var found=document.querySelector(p3?".fd-btn:not([data-pane])[data-f='"+val+"']":".fd-btn[data-pane='"+pane+"'][data-f='"+val+"']");if(found)found.className="fd-btn on";}
-}
-document.querySelectorAll(".fd-btn:not([data-pane])").forEach(function(btn){btn.addEventListener("click",function(){dFecha=btn.getAttribute("data-f");activateFechaBtn("p3",dFecha);upDia();});});
-document.querySelectorAll(".fd-all:not([data-pane])").forEach(function(btn){btn.addEventListener("click",function(){dFecha="ALL";activateFechaBtn("p3","ALL");upDia();});});
-document.querySelectorAll(".fd-btn[data-pane='p4']").forEach(function(btn){btn.addEventListener("click",function(){dFecha4=btn.getAttribute("data-f");activateFechaBtn("p4",dFecha4);if(p4Inited)upP4();});});
-document.querySelectorAll(".fd-all[data-pane='p4']").forEach(function(btn){btn.addEventListener("click",function(){dFecha4="ALL";activateFechaBtn("p4","ALL");if(p4Inited)upP4();});});
+// fecha handled by sb-fecha-cb listeners
 
 document.addEventListener("click",function(e){
   if(e.target&&e.target.id==="partidoBadge"){selPartidoHoras=null;setBadge("partidoBadge",null,null);refreshGroup();}
@@ -1438,6 +1556,74 @@ document.querySelectorAll(".fn[data-p='p7']").forEach(function(btn){
     btn.className="fn on";
     selSede7=btn.getAttribute("data-s");
     if(p7Inited) mkCmp7();
+  });
+});
+
+// ── MULTI-DATE DROPDOWN ──────────────────────────────────────────────────
+function toggleDateDrop(pane){
+  var drop=document.getElementById("sb-drop-"+pane);
+  if(drop) drop.classList.toggle("open");
+}
+document.addEventListener("click",function(e){
+  ["p3","p4"].forEach(function(pane){
+    var toggle=document.getElementById("sb-toggle-"+pane);
+    var drop=document.getElementById("sb-drop-"+pane);
+    if(!toggle||!drop) return;
+    if(!toggle.contains(e.target)&&!drop.contains(e.target)){
+      drop.classList.remove("open");
+    }
+  });
+});
+function clearFechas(pane){
+  selFechas[pane]=[];
+  document.querySelectorAll(".sb-fecha-cb[data-pane='"+pane+"']").forEach(function(cb){cb.checked=false;});
+  updateDateLabel(pane);
+  if(pane==="p3"&&p3Inited) upDia();
+  if(pane==="p4"&&p4Inited) upP4();
+}
+function updateDateLabel(pane){
+  var el=document.getElementById("sb-date-label-"+pane);
+  var toggle=document.getElementById("sb-toggle-"+pane);
+  if(!el) return;
+  var sel=selFechas[pane];
+  if(!sel||sel.length===0){
+    el.textContent="Todas las fechas";
+    if(toggle) toggle.classList.remove("has-sel");
+  } else if(sel.length===1){
+    var parts=sel[0].split("-");
+    var dias={"2026-06-11":"Jue","2026-06-12":"Vie","2026-06-13":"Sab","2026-06-14":"Dom","2026-06-15":"Lun","2026-06-16":"Mar","2026-06-17":"Mie","2026-06-18":"Jue","2026-06-19":"Vie","2026-06-20":"Sab","2026-06-21":"Dom","2026-06-22":"Lun","2026-06-23":"Mar"};
+    el.textContent=(dias[sel[0]]||"")+" "+parseInt(parts[2])+" Jun";
+    if(toggle) toggle.classList.add("has-sel");
+  } else {
+    el.textContent=sel.length+" fechas";
+    if(toggle) toggle.classList.add("has-sel");
+  }
+}
+document.querySelectorAll(".sb-fecha-cb").forEach(function(cb){
+  cb.addEventListener("change",function(){
+    var pane=cb.getAttribute("data-pane");
+    var fecha=cb.getAttribute("data-f");
+    if(cb.checked){
+      if(selFechas[pane].indexOf(fecha)<0) selFechas[pane].push(fecha);
+    } else {
+      selFechas[pane]=selFechas[pane].filter(function(f){return f!==fecha;});
+    }
+    updateDateLabel(pane);
+    if(pane==="p3"&&p3Inited) upDia();
+    if(pane==="p4"&&p4Inited) upP4();
+  });
+});
+
+// ── SIDEBAR SEDE BUTTONS (all panes) ─────────────────────────────────────
+document.querySelectorAll(".sb-btn").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    var p=btn.getAttribute("data-p");
+    document.querySelectorAll(".sb-btn[data-p='"+p+"']").forEach(function(b){b.classList.remove("on");});
+    btn.classList.add("on");
+    if(p==="p4"){selSede4=btn.getAttribute("data-s");if(p4Inited)upP4();}
+    else if(p==="p6"){selSede["p6"]=btn.getAttribute("data-s");if(p6Inited)mkVentaPartidos();}
+    else if(p==="p7"){selSede7=btn.getAttribute("data-s");if(p7Inited)mkCmp7();}
+    else{selSede[p]=btn.getAttribute("data-s");if(p==="p2")upMundial();else if(p3Inited)upDia();}
   });
 });
 
